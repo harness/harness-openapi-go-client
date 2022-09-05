@@ -15,7 +15,7 @@ type SecretResponse struct {
 	// Creation timestamp for the secret
 	Created int64 `json:"created,omitempty"`
 	// Updated timestamp for the secret
-	Updated int64 `json:"updated,omitempty"`
-	Draft bool `json:"draft,omitempty"`
+	Updated            int64        `json:"updated,omitempty"`
+	Draft              bool         `json:"draft,omitempty"`
 	GovernanceMetadata *interface{} `json:"governance_metadata,omitempty"`
 }

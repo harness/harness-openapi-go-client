@@ -21,6 +21,6 @@ type Secret struct {
 	// Secret tags
 	Tags map[string]string `json:"tags,omitempty"`
 	// Secret description
-	Description string `json:"description,omitempty"`
-	Spec *SecretSpec `json:"spec"`
+	Description string      `json:"description,omitempty"`
+	Spec        *SecretSpec `json:"spec"`
 }

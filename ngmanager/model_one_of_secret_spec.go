@@ -10,14 +10,14 @@
 package ngmanager
 
 type OneOfSecretSpec struct {
-    SshKeyPathSpec
-    SshKeyReferenceSpec
-    SshPasswordSpec
-    SshKerberosTgtKeyTabFileSpec
-    SshKerberosTgtPasswordSpec
-    SecretFileSpec
-    SecretTextSpec
-    WinRmTgtKeyTabFileSpec
-    WinRmTgtPasswordSpec
-    WinRmNtlmSpec
+	SshKeyPathSpec
+	SshKeyReferenceSpec
+	SshPasswordSpec
+	SshKerberosTgtKeyTabFileSpec
+	SshKerberosTgtPasswordSpec
+	SecretFileSpec
+	SecretTextSpec
+	WinRmTgtKeyTabFileSpec
+	WinRmTgtPasswordSpec
+	WinRmNtlmSpec
 }

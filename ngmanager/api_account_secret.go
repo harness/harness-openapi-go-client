@@ -1,4 +1,3 @@
-
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
@@ -12,13 +11,13 @@ package ngmanager
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
+
 	"github.com/antihax/optional"
-	"os"
 )
 
 // Linger please
@@ -27,6 +26,7 @@ var (
 )
 
 type AccountSecretApiService service
+
 /*
 AccountSecretApiService Create a secret
 Creates a new secret
@@ -39,16 +39,16 @@ Creates a new secret
 */
 
 type AccountSecretApiCreateAccountScopedSecretOpts struct {
-    Account optional.String
-    PrivateSecret optional.Bool
+	Account       optional.String
+	PrivateSecret optional.Bool
 }
 
 func (a *AccountSecretApiService) CreateAccountScopedSecret(ctx context.Context, body SecretRequest, localVarOptionals *AccountSecretApiCreateAccountScopedSecretOpts) (SecretResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue SecretResponse
 	)
 
@@ -94,7 +94,7 @@ func (a *AccountSecretApiService) CreateAccountScopedSecret(ctx context.Context,
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -115,32 +115,33 @@ func (a *AccountSecretApiService) CreateAccountScopedSecret(ctx context.Context,
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
 			var v SecretResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 AccountSecretApiService Deletes a secret
 Deletes the information of the secret with the matching secret slug.
@@ -152,15 +153,15 @@ Deletes the information of the secret with the matching secret slug.
 */
 
 type AccountSecretApiDeleteAccountScopedSecretOpts struct {
-    Account optional.String
+	Account optional.String
 }
 
 func (a *AccountSecretApiService) DeleteAccountScopedSecret(ctx context.Context, secret string, localVarOptionals *AccountSecretApiDeleteAccountScopedSecretOpts) (SecretResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Delete")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Delete")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue SecretResponse
 	)
 
@@ -202,7 +203,7 @@ func (a *AccountSecretApiService) DeleteAccountScopedSecret(ctx context.Context,
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -223,32 +224,33 @@ func (a *AccountSecretApiService) DeleteAccountScopedSecret(ctx context.Context,
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v SecretResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 AccountSecretApiService Retrieve a secret
 Retrieves the information of the secret.
@@ -260,15 +262,15 @@ Retrieves the information of the secret.
 */
 
 type AccountSecretApiGetAccountScopedSecretOpts struct {
-    Account optional.String
+	Account optional.String
 }
 
 func (a *AccountSecretApiService) GetAccountScopedSecret(ctx context.Context, secret string, localVarOptionals *AccountSecretApiGetAccountScopedSecretOpts) (SecretResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue SecretResponse
 	)
 
@@ -310,7 +312,7 @@ func (a *AccountSecretApiService) GetAccountScopedSecret(ctx context.Context, se
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -331,32 +333,33 @@ func (a *AccountSecretApiService) GetAccountScopedSecret(ctx context.Context, se
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v SecretResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 AccountSecretApiService List secrets
 Retrieves the information of the secrets.
@@ -367,31 +370,31 @@ Retrieves the information of the secrets.
      * @param "Project" (optional.String) -  Slug field of the project the resource is scoped to
      * @param "Secret" (optional.Interface of []string) -  Slug field of secrets
      * @param "Type_" (optional.Interface of []string) -  Secret types on which the filter will be applied
-     * @param "Recursive" (optional.Bool) -  Expand current scope to include all child scopes 
+     * @param "Recursive" (optional.Bool) -  Expand current scope to include all child scopes
      * @param "SearchTerm" (optional.String) -  This would be used to filter resources having attributes matching with search term.
-     * @param "Page" (optional.Int32) -  Pagination page number strategy: Specify the page number within the paginated collection related to the number of items in each page 
+     * @param "Page" (optional.Int32) -  Pagination page number strategy: Specify the page number within the paginated collection related to the number of items in each page
      * @param "Limit" (optional.Int32) -  Pagination: Number of items to return
 @return []SecretResponse
 */
 
 type AccountSecretApiGetAccountScopedSecretsOpts struct {
-    Account optional.String
-    Org optional.String
-    Project optional.String
-    Secret optional.Interface
-    Type_ optional.Interface
-    Recursive optional.Bool
-    SearchTerm optional.String
-    Page optional.Int32
-    Limit optional.Int32
+	Account    optional.String
+	Org        optional.String
+	Project    optional.String
+	Secret     optional.Interface
+	Type_      optional.Interface
+	Recursive  optional.Bool
+	SearchTerm optional.String
+	Page       optional.Int32
+	Limit      optional.Int32
 }
 
 func (a *AccountSecretApiService) GetAccountScopedSecrets(ctx context.Context, localVarOptionals *AccountSecretApiGetAccountScopedSecretsOpts) ([]SecretResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue []SecretResponse
 	)
 
@@ -456,7 +459,7 @@ func (a *AccountSecretApiService) GetAccountScopedSecrets(ctx context.Context, l
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -477,32 +480,33 @@ func (a *AccountSecretApiService) GetAccountScopedSecrets(ctx context.Context, l
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v []SecretResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 AccountSecretApiService Update a secret
 Updates the information of the secret with the matching secret slug.
@@ -515,15 +519,15 @@ Updates the information of the secret with the matching secret slug.
 */
 
 type AccountSecretApiUpdateAccountScopedSecretOpts struct {
-    Account optional.String
+	Account optional.String
 }
 
 func (a *AccountSecretApiService) UpdateAccountScopedSecret(ctx context.Context, body SecretRequest, secret string, localVarOptionals *AccountSecretApiUpdateAccountScopedSecretOpts) (SecretResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Put")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Put")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue SecretResponse
 	)
 
@@ -567,7 +571,7 @@ func (a *AccountSecretApiService) UpdateAccountScopedSecret(ctx context.Context,
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -588,32 +592,33 @@ func (a *AccountSecretApiService) UpdateAccountScopedSecret(ctx context.Context,
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v SecretResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 AccountSecretApiService Validate unique secret slug
 Validates secret slug is unique
@@ -625,15 +630,15 @@ Validates secret slug is unique
 */
 
 type AccountSecretApiValidateUniqueAccountScopedSecretSlugOpts struct {
-    Account optional.String
+	Account optional.String
 }
 
 func (a *AccountSecretApiService) ValidateUniqueAccountScopedSecretSlug(ctx context.Context, secret string, localVarOptionals *AccountSecretApiValidateUniqueAccountScopedSecretSlugOpts) (ValidateSecretSlugResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Head")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Head")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue ValidateSecretSlugResponse
 	)
 
@@ -675,7 +680,7 @@ func (a *AccountSecretApiService) ValidateUniqueAccountScopedSecretSlug(ctx cont
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -696,26 +701,26 @@ func (a *AccountSecretApiService) ValidateUniqueAccountScopedSecretSlug(ctx cont
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v ValidateSecretSlugResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
