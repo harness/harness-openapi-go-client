@@ -9,6 +9,8 @@
  */
 package ngmanager
 
+import "encoding/json"
+
 type Secret struct {
 	// Secret name
 	Name string `json:"name"`
@@ -21,6 +23,18 @@ type Secret struct {
 	// Secret tags
 	Tags map[string]string `json:"tags,omitempty"`
 	// Secret description
-	Description string      `json:"description,omitempty"`
-	Spec        *SecretSpec `json:"spec"`
+	Description string `json:"description,omitempty"`
+
+	Spec                         json.RawMessage               `json:"spec"`
+	SecretSpec                   *SecretSpec                   `json:"-"`
+	SshKeyPathSpec               *SshKeyPathSpec               `json:"-"`
+	SshKeyReferenceSpec          *SshKeyReferenceSpec          `json:"-"`
+	SshPasswordSpec              *SshPasswordSpec              `json:"-"`
+	SshKerberosTgtKeyTabFileSpec *SshKerberosTgtKeyTabFileSpec `json:"-"`
+	SshKerberosTgtPasswordSpec   *SshKerberosTgtPasswordSpec   `json:"-"`
+	SecretFileSpec               *SecretFileSpec               `json:"-"`
+	SecretTextSpec               *SecretTextSpec               `json:"-"`
+	WinRmTgtKeyTabFileSpec       *WinRmTgtKeyTabFileSpec       `json:"-"`
+	WinRmTgtPasswordSpec         *WinRmTgtPasswordSpec         `json:"-"`
+	WinRmNtlmSpec                *WinRmNtlmSpec                `json:"-"`
 }
