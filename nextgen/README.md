@@ -46,6 +46,13 @@ Class | Method | HTTP request | Description
 *AccountSecretApi* | [**GetAccountScopedSecret**](docs/AccountSecretApi.md#getaccountscopedsecret) | **Get** /v1/secrets/{secret} | Retrieve a secret
 *AccountSecretApi* | [**GetAccountScopedSecrets**](docs/AccountSecretApi.md#getaccountscopedsecrets) | **Get** /v1/secrets | List secrets
 *AccountSecretApi* | [**UpdateAccountScopedSecret**](docs/AccountSecretApi.md#updateaccountscopedsecret) | **Put** /v1/secrets/{secret} | Update a secret
+*AccountTemplateApi* | [**CreateTemplatesAcc**](docs/AccountTemplateApi.md#createtemplatesacc) | **Post** /v1/templates | Create Template
+*AccountTemplateApi* | [**DeleteTemplateAcc**](docs/AccountTemplateApi.md#deletetemplateacc) | **Delete** /v1/templates/{template}/versions/{version} | Delete Template
+*AccountTemplateApi* | [**GetTemplateAcc**](docs/AccountTemplateApi.md#gettemplateacc) | **Get** /v1/templates/{template}/versions/{version} | Retrieve a Template
+*AccountTemplateApi* | [**GetTemplateStableAcc**](docs/AccountTemplateApi.md#gettemplatestableacc) | **Get** /v1/templates/{template} | Get Stable Template
+*AccountTemplateApi* | [**GetTemplatesListAcc**](docs/AccountTemplateApi.md#gettemplateslistacc) | **Get** /v1/templates | Get Templates List
+*AccountTemplateApi* | [**UpdateTemplateAcc**](docs/AccountTemplateApi.md#updatetemplateacc) | **Put** /v1/templates/{template}/versions/{version} | Update Template
+*AccountTemplateApi* | [**UpdateTemplateStableAcc**](docs/AccountTemplateApi.md#updatetemplatestableacc) | **Put** /v1/templates/{template}/versions/{version}/stable | Update Stable Template
 *FilterResourceGroupsApi* | [**FilterResourceGroups**](docs/FilterResourceGroupsApi.md#filterresourcegroups) | **Post** /v1/resource-groups/filter | Filter Resource Groups
 *OrgConnectorApi* | [**CreateOrgScopedConnector**](docs/OrgConnectorApi.md#createorgscopedconnector) | **Post** /v1/orgs/{org}/connectors | Create a Connector
 *OrgConnectorApi* | [**DeleteOrgScopedConnector**](docs/OrgConnectorApi.md#deleteorgscopedconnector) | **Delete** /v1/orgs/{org}/connectors/{connector} | Delete a connector
@@ -67,6 +74,13 @@ Class | Method | HTTP request | Description
 *OrgSecretApi* | [**GetOrgScopedSecret**](docs/OrgSecretApi.md#getorgscopedsecret) | **Get** /v1/orgs/{org}/secrets/{secret} | Retrieve a secret
 *OrgSecretApi* | [**GetOrgScopedSecrets**](docs/OrgSecretApi.md#getorgscopedsecrets) | **Get** /v1/orgs/{org}/secrets | List secrets
 *OrgSecretApi* | [**UpdateOrgScopedSecret**](docs/OrgSecretApi.md#updateorgscopedsecret) | **Put** /v1/orgs/{org}/secrets/{secret} | Update a secret
+*OrgTemplateApi* | [**CreateTemplatesOrg**](docs/OrgTemplateApi.md#createtemplatesorg) | **Post** /v1/orgs/{org}/templates | Create Template
+*OrgTemplateApi* | [**DeleteTemplateOrg**](docs/OrgTemplateApi.md#deletetemplateorg) | **Delete** /v1/orgs/{org}/templates/{template}/versions/{version} | Delete Template
+*OrgTemplateApi* | [**GetTemplateOrg**](docs/OrgTemplateApi.md#gettemplateorg) | **Get** /v1/orgs/{org}/templates/{template}/versions/{version} | Retrieve a Template
+*OrgTemplateApi* | [**GetTemplateStableOrg**](docs/OrgTemplateApi.md#gettemplatestableorg) | **Get** /v1/orgs/{org}/templates/{template} | Get Stable Template
+*OrgTemplateApi* | [**GetTemplatesListOrg**](docs/OrgTemplateApi.md#gettemplateslistorg) | **Get** /v1/orgs/{org}/templates | Get Templates List
+*OrgTemplateApi* | [**UpdateTemplateOrg**](docs/OrgTemplateApi.md#updatetemplateorg) | **Put** /v1/orgs/{org}/templates/{template}/versions/{version} | Update Template
+*OrgTemplateApi* | [**UpdateTemplateStableOrg**](docs/OrgTemplateApi.md#updatetemplatestableorg) | **Put** /v1/orgs/{org}/templates/{template}/versions/{version}/stable | Update Stable Template
 *OrganizationApi* | [**CreateOrganization**](docs/OrganizationApi.md#createorganization) | **Post** /v1/orgs | Create an organization
 *OrganizationApi* | [**DeleteOrganization**](docs/OrganizationApi.md#deleteorganization) | **Delete** /v1/orgs/{org} | Delete an organization
 *OrganizationApi* | [**GetOrganization**](docs/OrganizationApi.md#getorganization) | **Get** /v1/orgs/{org} | Retrieve an organization
@@ -117,6 +131,13 @@ Class | Method | HTTP request | Description
 *ProjectServicesApi* | [**GetService**](docs/ProjectServicesApi.md#getservice) | **Get** /v1/orgs/{org}/projects/{project}/services/{service} | Retrieve a Service
 *ProjectServicesApi* | [**GetServices**](docs/ProjectServicesApi.md#getservices) | **Get** /v1/orgs/{org}/projects/{project}/services | List Services
 *ProjectServicesApi* | [**UpdateService**](docs/ProjectServicesApi.md#updateservice) | **Put** /v1/orgs/{org}/projects/{project}/services/{service} | Update Service
+*ProjectTemplateApi* | [**CreateTemplatesProject**](docs/ProjectTemplateApi.md#createtemplatesproject) | **Post** /v1/orgs/{org}/projects/{project}/templates | Create Template
+*ProjectTemplateApi* | [**DeleteTemplateProject**](docs/ProjectTemplateApi.md#deletetemplateproject) | **Delete** /v1/orgs/{org}/projects/{project}/templates/{template}/versions/{version} | Delete Template
+*ProjectTemplateApi* | [**GetTemplateProject**](docs/ProjectTemplateApi.md#gettemplateproject) | **Get** /v1/orgs/{org}/projects/{project}/templates/{template}/versions/{version} | Retrieve a Template
+*ProjectTemplateApi* | [**GetTemplateStableProject**](docs/ProjectTemplateApi.md#gettemplatestableproject) | **Get** /v1/orgs/{org}/projects/{project}/templates/{template} | Get Stable Template
+*ProjectTemplateApi* | [**GetTemplatesListProject**](docs/ProjectTemplateApi.md#gettemplateslistproject) | **Get** /v1/orgs/{org}/projects/{project}/templates | Get Templates List
+*ProjectTemplateApi* | [**UpdateTemplateProject**](docs/ProjectTemplateApi.md#updatetemplateproject) | **Put** /v1/orgs/{org}/projects/{project}/templates/{template}/versions/{version} | Update Template
+*ProjectTemplateApi* | [**UpdateTemplateStableProject**](docs/ProjectTemplateApi.md#updatetemplatestableproject) | **Put** /v1/orgs/{org}/projects/{project}/templates/{template}/versions/{version}/stable | Update Stable Template
 
 ## Documentation For Models
 
@@ -151,14 +172,19 @@ Class | Method | HTTP request | Description
  - [CreateProjectRequest](docs/CreateProjectRequest.md)
  - [CreateResourceGroupRequest](docs/CreateResourceGroupRequest.md)
  - [CreateRoleRequest](docs/CreateRoleRequest.md)
+ - [EntityGitDetails](docs/EntityGitDetails.md)
  - [ExecutionSummary](docs/ExecutionSummary.md)
  - [ExecutorInfo](docs/ExecutorInfo.md)
  - [GitCreateDetails](docs/GitCreateDetails.md)
+ - [GitCreateDetails1](docs/GitCreateDetails1.md)
  - [GitDetails](docs/GitDetails.md)
+ - [GitFindDetails](docs/GitFindDetails.md)
  - [GitHttpConnectorSpec](docs/GitHttpConnectorSpec.md)
  - [GitHttpEncryptedConnectorSpec](docs/GitHttpEncryptedConnectorSpec.md)
  - [GitSshConnectorSpec](docs/GitSshConnectorSpec.md)
  - [GitUpdateDetails](docs/GitUpdateDetails.md)
+ - [GitUpdateDetails1](docs/GitUpdateDetails1.md)
+ - [InlineResponse200](docs/InlineResponse200.md)
  - [ModuleType](docs/ModuleType.md)
  - [NodeInfo](docs/NodeInfo.md)
  - [OneOfConnectorSpec](docs/OneOfConnectorSpec.md)
@@ -197,6 +223,12 @@ Class | Method | HTTP request | Description
  - [SshKeyPathSpec](docs/SshKeyPathSpec.md)
  - [SshKeyReferenceSpec](docs/SshKeyReferenceSpec.md)
  - [SshPasswordSpec](docs/SshPasswordSpec.md)
+ - [TemplateCreateRequestBody](docs/TemplateCreateRequestBody.md)
+ - [TemplateMetadataSummaryResponse](docs/TemplateMetadataSummaryResponse.md)
+ - [TemplateResponse](docs/TemplateResponse.md)
+ - [TemplateUpdateRequestBody](docs/TemplateUpdateRequestBody.md)
+ - [TemplateUpdateStableResponse](docs/TemplateUpdateStableResponse.md)
+ - [TemplateWithInputsResponse](docs/TemplateWithInputsResponse.md)
  - [UpdateOrganizationRequest](docs/UpdateOrganizationRequest.md)
  - [UpdateProjectRequest](docs/UpdateProjectRequest.md)
  - [WinRmNtlmSpec](docs/WinRmNtlmSpec.md)

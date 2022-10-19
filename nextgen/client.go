@@ -55,6 +55,8 @@ type APIClient struct {
 
 	AccountSecretApi *AccountSecretApiService
 
+	AccountTemplateApi *AccountTemplateApiService
+
 	FilterResourceGroupsApi *FilterResourceGroupsApiService
 
 	OrgConnectorApi *OrgConnectorApiService
@@ -64,6 +66,8 @@ type APIClient struct {
 	OrgRoleAssignmentsApi *OrgRoleAssignmentsApiService
 
 	OrgSecretApi *OrgSecretApiService
+
+	OrgTemplateApi *OrgTemplateApiService
 
 	OrganizationApi *OrganizationApiService
 
@@ -84,6 +88,8 @@ type APIClient struct {
 	ProjectSecretApi *ProjectSecretApiService
 
 	ProjectServicesApi *ProjectServicesApiService
+
+	ProjectTemplateApi *ProjectTemplateApiService
 }
 
 type service struct {
@@ -107,11 +113,13 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccountRoleAssignmentsApi = (*AccountRoleAssignmentsApiService)(&c.common)
 	c.AccountRolesApi = (*AccountRolesApiService)(&c.common)
 	c.AccountSecretApi = (*AccountSecretApiService)(&c.common)
+	c.AccountTemplateApi = (*AccountTemplateApiService)(&c.common)
 	c.FilterResourceGroupsApi = (*FilterResourceGroupsApiService)(&c.common)
 	c.OrgConnectorApi = (*OrgConnectorApiService)(&c.common)
 	c.OrgProjectApi = (*OrgProjectApiService)(&c.common)
 	c.OrgRoleAssignmentsApi = (*OrgRoleAssignmentsApiService)(&c.common)
 	c.OrgSecretApi = (*OrgSecretApiService)(&c.common)
+	c.OrgTemplateApi = (*OrgTemplateApiService)(&c.common)
 	c.OrganizationApi = (*OrganizationApiService)(&c.common)
 	c.OrganizationResourceGroupsApi = (*OrganizationResourceGroupsApiService)(&c.common)
 	c.OrganizationRolesApi = (*OrganizationRolesApiService)(&c.common)
@@ -122,6 +130,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ProjectRolesApi = (*ProjectRolesApiService)(&c.common)
 	c.ProjectSecretApi = (*ProjectSecretApiService)(&c.common)
 	c.ProjectServicesApi = (*ProjectServicesApiService)(&c.common)
+	c.ProjectTemplateApi = (*ProjectTemplateApiService)(&c.common)
 
 	return c
 }

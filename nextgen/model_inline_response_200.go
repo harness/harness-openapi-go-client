@@ -9,15 +9,6 @@
  */
 package nextgen
 
-type OneOfSecretSpec struct {
-    SshKeyPathSpec
-    SshKeyReferenceSpec
-    SshPasswordSpec
-    SshKerberosTgtKeyTabFileSpec
-    SshKerberosTgtPasswordSpec
-    SecretFileSpec
-    SecretTextSpec
-    WinRmTgtKeyTabFileSpec
-    WinRmTgtPasswordSpec
-    WinRmNtlmSpec
+type InlineResponse200 struct {
+	StableVersion string `json:"stable_version,omitempty"`
 }

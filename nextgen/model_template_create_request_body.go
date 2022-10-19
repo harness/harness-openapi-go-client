@@ -9,15 +9,9 @@
  */
 package nextgen
 
-type OneOfSecretSpec struct {
-    SshKeyPathSpec
-    SshKeyReferenceSpec
-    SshPasswordSpec
-    SshKerberosTgtKeyTabFileSpec
-    SshKerberosTgtPasswordSpec
-    SecretFileSpec
-    SecretTextSpec
-    WinRmTgtKeyTabFileSpec
-    WinRmTgtPasswordSpec
-    WinRmNtlmSpec
+// Templates Create Request Body
+type TemplateCreateRequestBody struct {
+	// Yaml for creating new Template
+	TemplateYaml string `json:"template_yaml,omitempty"`
+	GitDetails *GitCreateDetails1 `json:"git_details,omitempty"`
 }

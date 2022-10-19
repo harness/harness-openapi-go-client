@@ -9,15 +9,9 @@
  */
 package nextgen
 
-type OneOfSecretSpec struct {
-    SshKeyPathSpec
-    SshKeyReferenceSpec
-    SshPasswordSpec
-    SshKerberosTgtKeyTabFileSpec
-    SshKerberosTgtPasswordSpec
-    SecretFileSpec
-    SecretTextSpec
-    WinRmTgtKeyTabFileSpec
-    WinRmTgtPasswordSpec
-    WinRmNtlmSpec
+// Returns Template input YAML with template response
+type TemplateWithInputsResponse struct {
+	TemplateResponse *TemplateResponse `json:"template_response,omitempty"`
+	// Input Yaml for the Template
+	InputYaml string `json:"input_yaml,omitempty"`
 }
