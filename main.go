@@ -4,9 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	ngmanager "github.com/ashishsanodia-harness/harness-swagger-go-client-poc/ngmanager"
-
-	"github.com/antihax/optional"
+	nextgen "github.com/ashishsanodia-harness/harness-swagger-go-client-poc/nextgen"
 )
 
 func main() {
@@ -14,18 +12,17 @@ func main() {
 
 func swaggerCodeGenGetOrgs() {
 
-	cfg := ngmanager.Configuration{
-		BasePath:      "https://qa.harness.io/gateway/ng/api",
+	cfg := nextgen.Configuration{
+		BasePath:      "<host>",
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "Swagger-Codegen/1.0.0/go",
 	}
 
-	cfg.AddDefaultHeader("x-api-key", "<x-api-key-value>")
+	cfg.AddDefaultHeader("x-api-key", "<x-api-key>")
 
-	swaggerClient := ngmanager.NewAPIClient(&cfg)
+	swaggerClient := nextgen.NewAPIClient(&cfg)
 
-	organizationApiGetOrganizationsOpts := ngmanager.OrganizationApiGetOrganizationsOpts{
-		Account: optional.NewString("<account>")}
+	organizationApiGetOrganizationsOpts := nextgen.OrganizationApiGetOrganizationsOpts{}
 
 	orgzz, _, orgzzErr := swaggerClient.OrganizationApi.GetOrganizations(context.Background(), &organizationApiGetOrganizationsOpts)
 
@@ -44,19 +41,18 @@ func swaggerCodeGenGetOrgs() {
 
 func swaggerCodeGenGetAccountScopedSecret() {
 
-	cfg := ngmanager.Configuration{
+	cfg := nextgen.Configuration{
 		BasePath:      "<host>",
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "Swagger-Codegen/1.0.0/go",
 	}
 
-	cfg.AddDefaultHeader("x-api-key", "<x-api-key-value>")
+	cfg.AddDefaultHeader("x-api-key", "<x-api-key>")
 
-	swaggerClient := ngmanager.NewAPIClient(&cfg)
+	swaggerClient := nextgen.NewAPIClient(&cfg)
 
 	secretSlug := "samplegithubconnector1credential"
-	accountSecretApiGetAccountScopedSecretOpts := ngmanager.AccountSecretApiGetAccountScopedSecretOpts{
-		Account: optional.NewString("<account>")}
+	accountSecretApiGetAccountScopedSecretOpts := nextgen.AccountSecretApiGetAccountScopedSecretOpts{}
 
 	secretz, _, secretzErr := swaggerClient.AccountSecretApi.GetAccountScopedSecret(context.Background(), secretSlug, &accountSecretApiGetAccountScopedSecretOpts)
 
@@ -84,17 +80,16 @@ func swaggerCodeGenGetAccountScopedSecret() {
 
 func swaggerCodeGenGetAccountScopedSecrets() {
 
-	cfg := ngmanager.Configuration{
+	cfg := nextgen.Configuration{
 		BasePath:      "<host>",
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "Swagger-Codegen/1.0.0/go",
 	}
 
-	cfg.AddDefaultHeader("x-api-key", "<x-api-key-value>")
-	swaggerClient := ngmanager.NewAPIClient(&cfg)
+	cfg.AddDefaultHeader("x-api-key", "<x-api-key>")
+	swaggerClient := nextgen.NewAPIClient(&cfg)
 
-	accountSecretApiGetAccountScopedSecretsOpts := ngmanager.AccountSecretApiGetAccountScopedSecretsOpts{
-		Account: optional.NewString("<account>")}
+	accountSecretApiGetAccountScopedSecretsOpts := nextgen.AccountSecretApiGetAccountScopedSecretsOpts{}
 	secretzz, _, secretzzErr := swaggerClient.AccountSecretApi.GetAccountScopedSecrets(context.Background(), &accountSecretApiGetAccountScopedSecretsOpts)
 	if secretzzErr == nil {
 		for _, element := range secretzz {
