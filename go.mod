@@ -1,9 +1,10 @@
-module github.com/ashishsanodia-harness/harness-swagger-go-client-poc
+module github.com/harness/harness-swagger-go-client-poc
 
 go 1.19
 
 require (
 	github.com/antihax/optional v1.0.0
+	github.com/ashishsanodia-harness/harness-swagger-go-client-poc v0.0.0-20221019132155-c7d33589f30f
 	golang.org/x/oauth2 v0.1.0
 )
 
@@ -39,7 +40,7 @@ require (
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/curioswitch/go-reassign v0.2.0 // indirect
-	github.com/daixiang0/gci v0.8.0 // indirect
+	github.com/daixiang0/gci v0.8.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/denis-tingaikin/go-header v0.4.3 // indirect
 	github.com/dnephin/pflag v1.0.7 // indirect
@@ -99,7 +100,7 @@ require (
 	github.com/kkHAIKE/contextcheck v1.1.3 // indirect
 	github.com/kulti/thelper v0.6.3 // indirect
 	github.com/kunwardeep/paralleltest v1.0.6 // indirect
-	github.com/kyoh86/exportloopref v0.1.8 // indirect
+	github.com/kyoh86/exportloopref v0.1.9 // indirect
 	github.com/kyokomi/emoji/v2 v2.2.10 // indirect
 	github.com/ldez/gomoddirectives v0.2.3 // indirect
 	github.com/ldez/tagliatelle v0.3.1 // indirect
@@ -194,7 +195,7 @@ require (
 	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/term v0.1.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
-	golang.org/x/tools v0.1.12 // indirect
+	golang.org/x/tools v0.2.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
