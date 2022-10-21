@@ -1,4 +1,4 @@
-module github.com/harness/harness-swagger-go-client-poc
+module github.com/harness/harness-swagger-go-client
 
 go 1.19
 
