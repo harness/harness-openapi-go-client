@@ -1,4 +1,4 @@
-module github.com/harness/harness-swagger-go-client
+module github.com/harness/harness-openapi-go-client
 
 go 1.19
 
