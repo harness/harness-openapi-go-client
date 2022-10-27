@@ -34,17 +34,13 @@ Creates a Template in the Project scope.
  * @param project Project Identifier
  * @param optional nil or *ProjectTemplateApiCreateTemplatesProjectOpts - Optional Parameters:
      * @param "Body" (optional.Interface of TemplateCreateRequestBody) -  Templates Create Request Body
-     * @param "HarnessAccount" (optional.String) -  Account Identifier for the Entity.
-     * @param "IsStable" (optional.Bool) -  True if given version for template to be set as stable
-     * @param "Comments" (optional.String) -  Specify comment with respect to changes  
+     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 @return TemplateResponse
 */
 
 type ProjectTemplateApiCreateTemplatesProjectOpts struct {
     Body optional.Interface
     HarnessAccount optional.String
-    IsStable optional.Bool
-    Comments optional.String
 }
 
 func (a *ProjectTemplateApiService) CreateTemplatesProject(ctx context.Context, org string, project string, localVarOptionals *ProjectTemplateApiCreateTemplatesProjectOpts) (TemplateResponse, *http.Response, error) {
@@ -65,12 +61,6 @@ func (a *ProjectTemplateApiService) CreateTemplatesProject(ctx context.Context, 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.IsStable.IsSet() {
-		localVarQueryParams.Add("is_stable", parameterToString(localVarOptionals.IsStable.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Comments.IsSet() {
-		localVarQueryParams.Add("comments", parameterToString(localVarOptionals.Comments.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json", "application/yaml"}
 
@@ -163,7 +153,7 @@ Deletes particular version of Template at Project scope.
  * @param org Organization Identifier
  * @param version Version Label for Template
  * @param optional nil or *ProjectTemplateApiDeleteTemplateProjectOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Account Identifier for the Entity.
+     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
      * @param "Comments" (optional.String) -  Specify comment with respect to changes  
 
 */
@@ -265,8 +255,8 @@ Retrieves particular version of Template at Project scope.
  * @param org Organization Identifier
  * @param version Version Label for Template
  * @param optional nil or *ProjectTemplateApiGetTemplateProjectOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Account Identifier for the Entity.
-     * @param "GetInputYaml" (optional.Bool) -  Use it to get Template along with Input Set YAML
+     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+     * @param "IncludeYaml" (optional.Bool) -  Use it to get Template along with Input Set YAML
      * @param "BranchName" (optional.String) -  Name of the branch
      * @param "ParentConnectorRef" (optional.String) -  Connector ref of parent template if its remote
      * @param "ParentRepoName" (optional.String) -  Repo name of parent template if its remote
@@ -278,7 +268,7 @@ Retrieves particular version of Template at Project scope.
 
 type ProjectTemplateApiGetTemplateProjectOpts struct {
     HarnessAccount optional.String
-    GetInputYaml optional.Bool
+    IncludeYaml optional.Bool
     BranchName optional.String
     ParentConnectorRef optional.String
     ParentRepoName optional.String
@@ -307,8 +297,8 @@ func (a *ProjectTemplateApiService) GetTemplateProject(ctx context.Context, proj
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.GetInputYaml.IsSet() {
-		localVarQueryParams.Add("get_input_yaml", parameterToString(localVarOptionals.GetInputYaml.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.IncludeYaml.IsSet() {
+		localVarQueryParams.Add("include_yaml", parameterToString(localVarOptionals.IncludeYaml.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.BranchName.IsSet() {
 		localVarQueryParams.Add("branch_name", parameterToString(localVarOptionals.BranchName.Value(), ""))
@@ -413,8 +403,8 @@ Retrieves stable version of Template at Project scope.
  * @param project Project Identifier
  * @param template Template Identifier
  * @param optional nil or *ProjectTemplateApiGetTemplateStableProjectOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Account Identifier for the Entity.
-     * @param "GetInputYaml" (optional.Bool) -  Use it to get Template along with Input Set YAML
+     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+     * @param "IncludeYaml" (optional.Bool) -  Use it to get Template along with Input Set YAML
      * @param "BranchName" (optional.String) -  Name of the branch
      * @param "ParentConnectorRef" (optional.String) -  Connector ref of parent template if its remote
      * @param "ParentRepoName" (optional.String) -  Repo name of parent template if its remote
@@ -426,7 +416,7 @@ Retrieves stable version of Template at Project scope.
 
 type ProjectTemplateApiGetTemplateStableProjectOpts struct {
     HarnessAccount optional.String
-    GetInputYaml optional.Bool
+    IncludeYaml optional.Bool
     BranchName optional.String
     ParentConnectorRef optional.String
     ParentRepoName optional.String
@@ -454,8 +444,8 @@ func (a *ProjectTemplateApiService) GetTemplateStableProject(ctx context.Context
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.GetInputYaml.IsSet() {
-		localVarQueryParams.Add("get_input_yaml", parameterToString(localVarOptionals.GetInputYaml.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.IncludeYaml.IsSet() {
+		localVarQueryParams.Add("include_yaml", parameterToString(localVarOptionals.IncludeYaml.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.BranchName.IsSet() {
 		localVarQueryParams.Add("branch_name", parameterToString(localVarOptionals.BranchName.Value(), ""))
@@ -559,13 +549,13 @@ Retrieves list of Template with meta-data at Project scope.
  * @param org Organization Identifier
  * @param project Project Identifier
  * @param optional nil or *ProjectTemplateApiGetTemplatesListProjectOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Account Identifier for the Entity.
+     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
      * @param "Page" (optional.Int32) -  Pagination page number strategy: Specify the page number within the paginated collection related to the number of items in each page 
      * @param "Limit" (optional.Int32) -  Pagination: Number of items to return
      * @param "Sort" (optional.String) -  Parameter on the basis of which sorting is done.
      * @param "Order" (optional.String) -  Order on the basis of which sorting is done.
      * @param "SearchTerm" (optional.String) -  This would be used to filter resources having attributes matching with search term.
-     * @param "ListType" (optional.String) -  Template List Type
+     * @param "Type_" (optional.String) -  Template List Type
      * @param "Recursive" (optional.Bool) -  Specify true if all accessible Templates are to be included
      * @param "Names" (optional.Interface of []string) -  Template names for filtering
      * @param "Identifiers" (optional.Interface of []string) -  Template Ids for Filtering
@@ -582,7 +572,7 @@ type ProjectTemplateApiGetTemplatesListProjectOpts struct {
     Sort optional.String
     Order optional.String
     SearchTerm optional.String
-    ListType optional.String
+    Type_ optional.String
     Recursive optional.Bool
     Names optional.Interface
     Identifiers optional.Interface
@@ -624,8 +614,8 @@ func (a *ProjectTemplateApiService) GetTemplatesListProject(ctx context.Context,
 	if localVarOptionals != nil && localVarOptionals.SearchTerm.IsSet() {
 		localVarQueryParams.Add("search_term", parameterToString(localVarOptionals.SearchTerm.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ListType.IsSet() {
-		localVarQueryParams.Add("list_type", parameterToString(localVarOptionals.ListType.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
+		localVarQueryParams.Add("type", parameterToString(localVarOptionals.Type_.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Recursive.IsSet() {
 		localVarQueryParams.Add("recursive", parameterToString(localVarOptionals.Recursive.Value(), ""))
@@ -732,17 +722,13 @@ Updates particular version of Template at Project scope.
  * @param version Version Label for Template
  * @param optional nil or *ProjectTemplateApiUpdateTemplateProjectOpts - Optional Parameters:
      * @param "Body" (optional.Interface of TemplateUpdateRequestBody) -  Templates Update Request Body
-     * @param "HarnessAccount" (optional.String) -  Account Identifier for the Entity.
-     * @param "IsStable" (optional.Bool) -  True if given version for template to be set as stable
-     * @param "Comments" (optional.String) -  Specify comment with respect to changes  
+     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 @return TemplateResponse
 */
 
 type ProjectTemplateApiUpdateTemplateProjectOpts struct {
     Body optional.Interface
     HarnessAccount optional.String
-    IsStable optional.Bool
-    Comments optional.String
 }
 
 func (a *ProjectTemplateApiService) UpdateTemplateProject(ctx context.Context, project string, template string, org string, version string, localVarOptionals *ProjectTemplateApiUpdateTemplateProjectOpts) (TemplateResponse, *http.Response, error) {
@@ -765,12 +751,6 @@ func (a *ProjectTemplateApiService) UpdateTemplateProject(ctx context.Context, p
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.IsStable.IsSet() {
-		localVarQueryParams.Add("is_stable", parameterToString(localVarOptionals.IsStable.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Comments.IsSet() {
-		localVarQueryParams.Add("comments", parameterToString(localVarOptionals.Comments.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json", "application/yaml"}
 
@@ -864,15 +844,13 @@ Updates the stable version of Template at Project scope.
  * @param version Version Label for Template
  * @param optional nil or *ProjectTemplateApiUpdateTemplateStableProjectOpts - Optional Parameters:
      * @param "Body" (optional.Interface of GitFindDetails) -  Templates Fetch Request Body
-     * @param "HarnessAccount" (optional.String) -  Account Identifier for the Entity.
-     * @param "Comments" (optional.String) -  Specify comment with respect to changes  
+     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 @return TemplateUpdateStableResponse
 */
 
 type ProjectTemplateApiUpdateTemplateStableProjectOpts struct {
     Body optional.Interface
     HarnessAccount optional.String
-    Comments optional.String
 }
 
 func (a *ProjectTemplateApiService) UpdateTemplateStableProject(ctx context.Context, org string, project string, template string, version string, localVarOptionals *ProjectTemplateApiUpdateTemplateStableProjectOpts) (TemplateUpdateStableResponse, *http.Response, error) {
@@ -895,9 +873,6 @@ func (a *ProjectTemplateApiService) UpdateTemplateStableProject(ctx context.Cont
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Comments.IsSet() {
-		localVarQueryParams.Add("comments", parameterToString(localVarOptionals.Comments.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json", "application/yaml"}
 

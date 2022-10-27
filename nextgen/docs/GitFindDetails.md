@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ParentAccountId** | **string** | Account name of parent template if its remote | [optional] [default to null]
 **ParentOrgId** | **string** | Organization name of parent template if its remote | [optional] [default to null]
 **ParentProjectId** | **string** | Project name of parent entity if its remote | [optional] [default to null]
+**Comments** | **string** | Specify comment with respect to changes   | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

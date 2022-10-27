@@ -9475,14 +9475,13 @@ paths:
       parameters:
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
       - name: page
         in: query
@@ -9531,7 +9530,7 @@ paths:
         explode: true
         schema:
           type: string
-      - name: list_type
+      - name: type
         in: query
         description: Template List Type
         required: false
@@ -9688,30 +9687,12 @@ paths:
       parameters:
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: is_stable
-        in: query
-        description: True if given version for template to be set as stable
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -9854,16 +9835,15 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
-      - name: get_input_yaml
+      - name: include_yaml
         in: query
         description: Use it to get Template along with Input Set YAML
         required: false
@@ -10069,16 +10049,15 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
-      - name: get_input_yaml
+      - name: include_yaml
         in: query
         description: Use it to get Template along with Input Set YAML
         required: false
@@ -10283,30 +10262,12 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: is_stable
-        in: query
-        description: True if given version for template to be set as stable
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -10456,14 +10417,13 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
       - name: comments
         in: query
@@ -10502,21 +10462,12 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -10557,14 +10508,13 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
       - name: page
         in: query
@@ -10613,7 +10563,7 @@ paths:
         explode: true
         schema:
           type: string
-      - name: list_type
+      - name: type
         in: query
         description: Template List Type
         required: false
@@ -10778,30 +10728,12 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: is_stable
-        in: query
-        description: True if given version for template to be set as stable
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -10952,16 +10884,15 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
-      - name: get_input_yaml
+      - name: include_yaml
         in: query
         description: Use it to get Template along with Input Set YAML
         required: false
@@ -11175,16 +11106,15 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
-      - name: get_input_yaml
+      - name: include_yaml
         in: query
         description: Use it to get Template along with Input Set YAML
         required: false
@@ -11397,30 +11327,12 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: is_stable
-        in: query
-        description: True if given version for template to be set as stable
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -11578,14 +11490,13 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
       - name: comments
         in: query
@@ -11632,21 +11543,12 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -11695,14 +11597,13 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
       - name: page
         in: query
@@ -11751,7 +11652,7 @@ paths:
         explode: true
         schema:
           type: string
-      - name: list_type
+      - name: type
         in: query
         description: Template List Type
         required: false
@@ -11924,30 +11825,12 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: is_stable
-        in: query
-        description: True if given version for template to be set as stable
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -12106,16 +11989,15 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
-      - name: get_input_yaml
+      - name: include_yaml
         in: query
         description: Use it to get Template along with Input Set YAML
         required: false
@@ -12337,16 +12219,15 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
-      - name: get_input_yaml
+      - name: include_yaml
         in: query
         description: Use it to get Template along with Input Set YAML
         required: false
@@ -12567,30 +12448,12 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: is_stable
-        in: query
-        description: True if given version for template to be set as stable
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -12756,14 +12619,13 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
         schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
           type: string
       - name: comments
         in: query
@@ -12818,21 +12680,12 @@ paths:
           type: string
       - name: Harness-Account
         in: header
-        description: Account Identifier for the Entity.
+        description: "Slug field of the account the resource is scoped to. This is\
+          \ required for Authorization methods other than the x-api-key header. If\
+          \ you are using the x-api-key header, this can be skipped."
         required: false
         style: simple
         explode: false
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
-          type: string
-      - name: comments
-        in: query
-        description: 'Specify comment with respect to changes  '
-        required: false
-        style: form
-        explode: true
         schema:
           type: string
       requestBody:
@@ -17113,6 +16966,9 @@ components:
         parent_project_id:
           type: string
           description: Project name of parent entity if its remote
+        comments:
+          type: string
+          description: 'Specify comment with respect to changes  '
       description: Contains parameters related to Fetching an Entity for Git Experience.
       x-stoplight:
         id: 8b3cs1apis8zf
@@ -17124,6 +16980,7 @@ components:
           parent_account_id: example_account_id
           parent_org_id: example_org_id
           parent_project_id: example_project_id
+          comments: sample_comments
     GitCreateDetails1:
       title: Create Git Details
       type: object
@@ -17225,11 +17082,14 @@ components:
           description: Yaml for updating existing Template
         git_details:
           $ref: '#/components/schemas/GitUpdateDetails1'
+        comments:
+          type: string
+          description: 'Specify comment with respect to changes  '
       description: Templates Update Request Body
       x-stoplight:
         id: ok69fcmiqlm1c
       x-examples:
-        example-1:
+        example-2:
           template_yaml: |
             template:
               name: Example_template
@@ -17266,6 +17126,7 @@ components:
             file_path: /folder/file.json
             repo_name: example_repository
             store_type: INLINE
+          comments: sample_comment
     TemplateCreateRequestBody:
       title: TemplateCreateRequestBody
       type: object
@@ -17275,11 +17136,17 @@ components:
           description: Yaml for creating new Template
         git_details:
           $ref: '#/components/schemas/GitCreateDetails1'
+        is_stable:
+          type: boolean
+          description: True if given version for template to be set as stable
+        comments:
+          type: string
+          description: 'Specify comment with respect to changes  '
       description: Templates Create Request Body
       x-stoplight:
         id: mp9rm9sp09yru
       x-examples:
-        example-1:
+        example-2:
           template_yaml: |
             template:
               name: Example_template
@@ -17314,6 +17181,8 @@ components:
             connector_ref: git_connector
             store_type: INLINE
             repo_name: example_repository
+          is_stable: true
+          comments: sample_comment
     TemplateUpdateStableResponse:
       title: TemplateUpdateStableResponse
       type: object
@@ -19118,25 +18987,14 @@ components:
     AccountHeaderParam:
       name: Harness-Account
       in: header
-      description: Account Identifier for the Entity.
+      description: "Slug field of the account the resource is scoped to. This is required\
+        \ for Authorization methods other than the x-api-key header. If you are using\
+        \ the x-api-key header, this can be skipped."
       required: false
       style: simple
       explode: false
       schema:
-        maxLength: 64
-        minLength: 1
-        pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
         type: string
-    SetDefaultTemplate:
-      name: is_stable
-      in: query
-      description: True if given version for template to be set as stable
-      required: false
-      style: form
-      explode: true
-      schema:
-        type: boolean
-        default: false
     Comments:
       name: comments
       in: query
@@ -19176,7 +19034,7 @@ components:
       schema:
         type: string
     TemplateListType:
-      name: list_type
+      name: type
       in: query
       description: Template List Type
       required: false
@@ -19199,7 +19057,7 @@ components:
         type: boolean
         default: false
     GetTemplateInputYaml:
-      name: get_input_yaml
+      name: include_yaml
       in: query
       description: Use it to get Template along with Input Set YAML
       required: false
@@ -20795,6 +20653,7 @@ components:
                   file_path: /folder/file.json
                   repo_name: example_repository
                   store_type: INLINE
+                comments: sample_comments
         application/yaml:
           schema:
             $ref: '#/components/schemas/TemplateUpdateRequestBody'
@@ -20837,6 +20696,7 @@ components:
                   file_path: /folder/file.json
                   repo_name: example_repository
                   store_type: INLINE
+                comments: sample_comments
     TemplateFetchBody:
       description: Templates Fetch Request Body
       content:
@@ -20852,6 +20712,7 @@ components:
                 parent_account_id: example_account_id
                 parent_org_id: example_org_id
                 parent_project_id: example_project_id
+                comments: sample_comments
         application/yaml:
           schema:
             $ref: '#/components/schemas/GitFindDetails'
@@ -20864,6 +20725,7 @@ components:
                 parent_account_id: example_account_id
                 parent_org_id: example_org_id
                 parent_project_id: example_project_id
+                comments: sample_comments
     TemplateCreateBody:
       description: Templates Create Request Body
       content:
@@ -20907,6 +20769,8 @@ components:
                   connector_ref: git_connector
                   store_type: INLINE
                   repo_name: example_repository
+                is_stable: true
+                comments: sample_comment
         application/yaml:
           schema:
             $ref: '#/components/schemas/TemplateCreateRequestBody'
@@ -20947,6 +20811,8 @@ components:
                   connector_ref: git_connector
                   store_type: INLINE
                   repo_name: example_repository
+                is_stable: true
+                comments: sample_comment
   securitySchemes:
     x-api-key:
       type: apiKey

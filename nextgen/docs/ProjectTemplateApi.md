@@ -34,9 +34,7 @@ Name | Type | Description  | Notes
 
 
  **body** | [**optional.Interface of TemplateCreateRequestBody**](TemplateCreateRequestBody.md)| Templates Create Request Body | 
- **harnessAccount** | **optional.**| Account Identifier for the Entity. | 
- **isStable** | **optional.**| True if given version for template to be set as stable | [default to false]
- **comments** | **optional.**| Specify comment with respect to changes   | 
+ **harnessAccount** | **optional.**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
 
 ### Return type
 
@@ -78,7 +76,7 @@ Name | Type | Description  | Notes
 
 
 
- **harnessAccount** | **optional.String**| Account Identifier for the Entity. | 
+ **harnessAccount** | **optional.String**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
  **comments** | **optional.String**| Specify comment with respect to changes   | 
 
 ### Return type
@@ -121,8 +119,8 @@ Name | Type | Description  | Notes
 
 
 
- **harnessAccount** | **optional.String**| Account Identifier for the Entity. | 
- **getInputYaml** | **optional.Bool**| Use it to get Template along with Input Set YAML | 
+ **harnessAccount** | **optional.String**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
+ **includeYaml** | **optional.Bool**| Use it to get Template along with Input Set YAML | 
  **branchName** | **optional.String**| Name of the branch | 
  **parentConnectorRef** | **optional.String**| Connector ref of parent template if its remote | 
  **parentRepoName** | **optional.String**| Repo name of parent template if its remote | 
@@ -168,8 +166,8 @@ Name | Type | Description  | Notes
 
 
 
- **harnessAccount** | **optional.String**| Account Identifier for the Entity. | 
- **getInputYaml** | **optional.Bool**| Use it to get Template along with Input Set YAML | 
+ **harnessAccount** | **optional.String**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
+ **includeYaml** | **optional.Bool**| Use it to get Template along with Input Set YAML | 
  **branchName** | **optional.String**| Name of the branch | 
  **parentConnectorRef** | **optional.String**| Connector ref of parent template if its remote | 
  **parentRepoName** | **optional.String**| Repo name of parent template if its remote | 
@@ -213,13 +211,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **harnessAccount** | **optional.String**| Account Identifier for the Entity. | 
+ **harnessAccount** | **optional.String**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
  **page** | **optional.Int32**| Pagination page number strategy: Specify the page number within the paginated collection related to the number of items in each page  | [default to 0]
  **limit** | **optional.Int32**| Pagination: Number of items to return | [default to 30]
  **sort** | **optional.String**| Parameter on the basis of which sorting is done. | 
  **order** | **optional.String**| Order on the basis of which sorting is done. | 
  **searchTerm** | **optional.String**| This would be used to filter resources having attributes matching with search term. | 
- **listType** | **optional.String**| Template List Type | 
+ **type_** | **optional.String**| Template List Type | 
  **recursive** | **optional.Bool**| Specify true if all accessible Templates are to be included | [default to false]
  **names** | [**optional.Interface of []string**](string.md)| Template names for filtering | 
  **identifiers** | [**optional.Interface of []string**](string.md)| Template Ids for Filtering | 
@@ -268,9 +266,7 @@ Name | Type | Description  | Notes
 
 
  **body** | [**optional.Interface of TemplateUpdateRequestBody**](TemplateUpdateRequestBody.md)| Templates Update Request Body | 
- **harnessAccount** | **optional.**| Account Identifier for the Entity. | 
- **isStable** | **optional.**| True if given version for template to be set as stable | [default to false]
- **comments** | **optional.**| Specify comment with respect to changes   | 
+ **harnessAccount** | **optional.**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
 
 ### Return type
 
@@ -313,8 +309,7 @@ Name | Type | Description  | Notes
 
 
  **body** | [**optional.Interface of GitFindDetails**](GitFindDetails.md)| Templates Fetch Request Body | 
- **harnessAccount** | **optional.**| Account Identifier for the Entity. | 
- **comments** | **optional.**| Specify comment with respect to changes   | 
+ **harnessAccount** | **optional.**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
 
 ### Return type
 
