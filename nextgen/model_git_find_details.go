@@ -23,4 +23,6 @@ type GitFindDetails struct {
 	ParentOrgId string `json:"parent_org_id,omitempty"`
 	// Project name of parent entity if its remote
 	ParentProjectId string `json:"parent_project_id,omitempty"`
+	// Specify comment with respect to changes  
+	Comments string `json:"comments,omitempty"`
 }
