@@ -1,6 +1,6 @@
 package harness
 
 const (
-	SDKName    = "harness-go-sdk"
+	SDKName    = "harness-openapi-go-client"
 	SDKVersion = ""
 )
