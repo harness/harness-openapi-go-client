@@ -1,7 +1,7 @@
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
- * This is the Open Api Spec 3 for the Templates Validations and Refresh. This is under active development. Beware of the breaking change with respect to the generated code stub.
+ * This is the Open Api Spec 3 for the Access Control Service. This is under active development. Beware of the breaking change with respect to the generated code stub.
  *
  * API version: 1.0
  * Contact: contact@harness.io
@@ -29,6 +29,7 @@ import (
 	"time"
 	"unicode/utf8"
 
+	retryablehttp "github.com/hashicorp/go-retryablehttp"
 	"golang.org/x/oauth2"
 )
 
@@ -43,11 +44,55 @@ type APIClient struct {
 	cfg    *Configuration
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 
+	AccountId string
+	ApiKey    string
+	Endpoint  string
+
 	// API Services
+
+	AccountConnectorApi *AccountConnectorApiService
+
+	AccountResourceGroupsApi *AccountResourceGroupsApiService
+
+	AccountRoleAssignmentsApi *AccountRoleAssignmentsApiService
+
+	AccountRolesApi *AccountRolesApiService
+
+	AccountSecretApi *AccountSecretApiService
 
 	AccountTemplateApi *AccountTemplateApiService
 
+	FilterResourceGroupsApi *FilterResourceGroupsApiService
+
+	OrgConnectorApi *OrgConnectorApiService
+
+	OrgProjectApi *OrgProjectApiService
+
+	OrgRoleAssignmentsApi *OrgRoleAssignmentsApiService
+
+	OrgSecretApi *OrgSecretApiService
+
 	OrgTemplateApi *OrgTemplateApiService
+
+	OrganizationApi *OrganizationApiService
+
+	OrganizationResourceGroupsApi *OrganizationResourceGroupsApiService
+
+	OrganizationRolesApi *OrganizationRolesApiService
+
+	PipelinesApi *PipelinesApiService
+
+	ProjectConnectorApi *ProjectConnectorApiService
+
+	ProjectResourceGroupsApi *ProjectResourceGroupsApiService
+
+	ProjectRoleAssignmentsApi *ProjectRoleAssignmentsApiService
+
+	ProjectRolesApi *ProjectRolesApiService
+
+	ProjectSecretApi *ProjectSecretApiService
+
+	ProjectServicesApi *ProjectServicesApiService
 
 	ProjectTemplateApi *ProjectTemplateApiService
 }
@@ -59,17 +104,38 @@ type service struct {
 // NewAPIClient creates a new API client. Requires a userAgent string describing your application.
 // optionally a custom http.Client to allow for advanced features such as caching.
 func NewAPIClient(cfg *Configuration) *APIClient {
-	if cfg.HTTPClient == nil {
-		cfg.HTTPClient = http.DefaultClient
-	}
-
 	c := &APIClient{}
 	c.cfg = cfg
 	c.common.client = c
 
+	// Api Config
+	c.ApiKey = cfg.ApiKey
+	c.AccountId = cfg.AccountId
+	c.Endpoint = cfg.BasePath
+
 	// API Services
+	c.AccountConnectorApi = (*AccountConnectorApiService)(&c.common)
+	c.AccountResourceGroupsApi = (*AccountResourceGroupsApiService)(&c.common)
+	c.AccountRoleAssignmentsApi = (*AccountRoleAssignmentsApiService)(&c.common)
+	c.AccountRolesApi = (*AccountRolesApiService)(&c.common)
+	c.AccountSecretApi = (*AccountSecretApiService)(&c.common)
 	c.AccountTemplateApi = (*AccountTemplateApiService)(&c.common)
+	c.FilterResourceGroupsApi = (*FilterResourceGroupsApiService)(&c.common)
+	c.OrgConnectorApi = (*OrgConnectorApiService)(&c.common)
+	c.OrgProjectApi = (*OrgProjectApiService)(&c.common)
+	c.OrgRoleAssignmentsApi = (*OrgRoleAssignmentsApiService)(&c.common)
+	c.OrgSecretApi = (*OrgSecretApiService)(&c.common)
 	c.OrgTemplateApi = (*OrgTemplateApiService)(&c.common)
+	c.OrganizationApi = (*OrganizationApiService)(&c.common)
+	c.OrganizationResourceGroupsApi = (*OrganizationResourceGroupsApiService)(&c.common)
+	c.OrganizationRolesApi = (*OrganizationRolesApiService)(&c.common)
+	c.PipelinesApi = (*PipelinesApiService)(&c.common)
+	c.ProjectConnectorApi = (*ProjectConnectorApiService)(&c.common)
+	c.ProjectResourceGroupsApi = (*ProjectResourceGroupsApiService)(&c.common)
+	c.ProjectRoleAssignmentsApi = (*ProjectRoleAssignmentsApiService)(&c.common)
+	c.ProjectRolesApi = (*ProjectRolesApiService)(&c.common)
+	c.ProjectSecretApi = (*ProjectSecretApiService)(&c.common)
+	c.ProjectServicesApi = (*ProjectServicesApiService)(&c.common)
 	c.ProjectTemplateApi = (*ProjectTemplateApiService)(&c.common)
 
 	return c
@@ -150,7 +216,7 @@ func parameterToString(obj interface{}, collectionFormat string) string {
 }
 
 // callAPI do the request.
-func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
+func (c *APIClient) callAPI(request *retryablehttp.Request) (*http.Response, error) {
 	return c.cfg.HTTPClient.Do(request)
 }
 
@@ -168,7 +234,7 @@ func (c *APIClient) prepareRequest(
 	queryParams url.Values,
 	formParams url.Values,
 	fileName string,
-	fileBytes []byte) (localVarRequest *http.Request, err error) {
+	fileBytes []byte) (localVarRequest *retryablehttp.Request, err error) {
 
 	var body *bytes.Buffer
 
@@ -255,9 +321,9 @@ func (c *APIClient) prepareRequest(
 
 	// Generate a new request
 	if body != nil {
-		localVarRequest, err = http.NewRequest(method, url.String(), body)
+		localVarRequest, err = retryablehttp.NewRequest(method, url.String(), body)
 	} else {
-		localVarRequest, err = http.NewRequest(method, url.String(), nil)
+		localVarRequest, err = retryablehttp.NewRequest(method, url.String(), nil)
 	}
 	if err != nil {
 		return nil, err
@@ -294,7 +360,7 @@ func (c *APIClient) prepareRequest(
 				return nil, err
 			}
 
-			latestToken.SetAuthHeader(localVarRequest)
+			latestToken.SetAuthHeader(localVarRequest.Request)
 		}
 
 		// Basic HTTP Authentication
@@ -316,17 +382,17 @@ func (c *APIClient) prepareRequest(
 }
 
 func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err error) {
-		if strings.Contains(contentType, "application/xml") {
-			if err = xml.Unmarshal(b, v); err != nil {
-				return err
-			}
-			return nil
-		} else if strings.Contains(contentType, "application/json") {
-			if err = json.Unmarshal(b, v); err != nil {
-				return err
-			}
-			return nil
+	if strings.Contains(contentType, "application/xml") {
+		if err = xml.Unmarshal(b, v); err != nil {
+			return err
 		}
+		return nil
+	} else if strings.Contains(contentType, "application/json") {
+		if err = json.Unmarshal(b, v); err != nil {
+			return err
+		}
+		return nil
+	}
 	return errors.New("undefined response type")
 }
 
