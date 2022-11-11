@@ -1,7 +1,7 @@
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
- * This is the Open Api Spec 3 for the Templates Validations and Refresh. This is under active development. Beware of the breaking change with respect to the generated code stub.
+ * This is the Open Api Spec 3 for the Access Control Service. This is under active development. Beware of the breaking change with respect to the generated code stub.
  *
  * API version: 1.0
  * Contact: contact@harness.io
@@ -13,7 +13,7 @@ package nextgen
 type TemplateUpdateRequestBody struct {
 	// Yaml for updating existing Template
 	TemplateYaml string `json:"template_yaml,omitempty"`
-	GitDetails *GitUpdateDetails `json:"git_details,omitempty"`
+	GitDetails *GitUpdateDetails1 `json:"git_details,omitempty"`
 	// Specify comment with respect to changes  
 	Comments string `json:"comments,omitempty"`
 }

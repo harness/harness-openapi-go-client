@@ -19,6 +19,10 @@ type PipelineGetResponseBody struct {
 	Slug string `json:"slug,omitempty"`
 	// Pipeline name
 	Name string `json:"name,omitempty"`
+	// Organization identifier
+	Org string `json:"org,omitempty"`
+	// Project identifier
+	Project string `json:"project,omitempty"`
 	// Pipeline description
 	Description string `json:"description,omitempty"`
 	// Pipeline tags

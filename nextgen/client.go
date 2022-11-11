@@ -84,6 +84,8 @@ type APIClient struct {
 
 	ProjectConnectorApi *ProjectConnectorApiService
 
+	ProjectEnvironmentsApi *ProjectEnvironmentsApiService
+
 	ProjectResourceGroupsApi *ProjectResourceGroupsApiService
 
 	ProjectRoleAssignmentsApi *ProjectRoleAssignmentsApiService
@@ -131,6 +133,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OrganizationRolesApi = (*OrganizationRolesApiService)(&c.common)
 	c.PipelinesApi = (*PipelinesApiService)(&c.common)
 	c.ProjectConnectorApi = (*ProjectConnectorApiService)(&c.common)
+	c.ProjectEnvironmentsApi = (*ProjectEnvironmentsApiService)(&c.common)
 	c.ProjectResourceGroupsApi = (*ProjectResourceGroupsApiService)(&c.common)
 	c.ProjectRoleAssignmentsApi = (*ProjectRoleAssignmentsApiService)(&c.common)
 	c.ProjectRolesApi = (*ProjectRolesApiService)(&c.common)
