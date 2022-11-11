@@ -2,7 +2,7 @@
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
- * This is the Open Api Spec 3 for the Access Control Service. This is under active development. Beware of the breaking change with respect to the generated code stub.
+ * This is the Open Api Spec 3 for the Templates Validations and Refresh. This is under active development. Beware of the breaking change with respect to the generated code stub.
  *
  * API version: 1.0
  * Contact: contact@harness.io
@@ -258,11 +258,11 @@ Retrieves particular version of Template at Project scope.
      * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
      * @param "IncludeYaml" (optional.Bool) -  Use it to get Template along with Input Set YAML
      * @param "BranchName" (optional.String) -  Name of the branch
-     * @param "ParentConnectorRef" (optional.String) -  Connector ref of parent template if its remote
-     * @param "ParentRepoName" (optional.String) -  Repo name of parent template if its remote
-     * @param "ParentAccountId" (optional.String) -  Account name of parent template if its remote
-     * @param "ParentOrgId" (optional.String) -  Organization name of parent template if its remote
-     * @param "ParentProjectId" (optional.String) -  Project name of parent entity if its remote
+     * @param "ParentEntityConnectorRef" (optional.String) -  Connector ref of parent template if its remote
+     * @param "ParentEntityRepoName" (optional.String) -  Repo name of parent template if its remote
+     * @param "ParentEntityAccountId" (optional.String) -  Account name of parent template if its remote
+     * @param "ParentEntityOrgId" (optional.String) -  Organization name of parent template if its remote
+     * @param "ParentEntityProjectId" (optional.String) -  Project name of parent entity if its remote
 @return TemplateWithInputsResponse
 */
 
@@ -270,11 +270,11 @@ type ProjectTemplateApiGetTemplateProjectOpts struct {
     HarnessAccount optional.String
     IncludeYaml optional.Bool
     BranchName optional.String
-    ParentConnectorRef optional.String
-    ParentRepoName optional.String
-    ParentAccountId optional.String
-    ParentOrgId optional.String
-    ParentProjectId optional.String
+    ParentEntityConnectorRef optional.String
+    ParentEntityRepoName optional.String
+    ParentEntityAccountId optional.String
+    ParentEntityOrgId optional.String
+    ParentEntityProjectId optional.String
 }
 
 func (a *ProjectTemplateApiService) GetTemplateProject(ctx context.Context, project string, template string, org string, version string, localVarOptionals *ProjectTemplateApiGetTemplateProjectOpts) (TemplateWithInputsResponse, *http.Response, error) {
@@ -303,20 +303,20 @@ func (a *ProjectTemplateApiService) GetTemplateProject(ctx context.Context, proj
 	if localVarOptionals != nil && localVarOptionals.BranchName.IsSet() {
 		localVarQueryParams.Add("branch_name", parameterToString(localVarOptionals.BranchName.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentConnectorRef.IsSet() {
-		localVarQueryParams.Add("parent_connector_ref", parameterToString(localVarOptionals.ParentConnectorRef.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityConnectorRef.IsSet() {
+		localVarQueryParams.Add("parent_entity_connector_ref", parameterToString(localVarOptionals.ParentEntityConnectorRef.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentRepoName.IsSet() {
-		localVarQueryParams.Add("parent_repo_name", parameterToString(localVarOptionals.ParentRepoName.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityRepoName.IsSet() {
+		localVarQueryParams.Add("parent_entity_repo_name", parameterToString(localVarOptionals.ParentEntityRepoName.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentAccountId.IsSet() {
-		localVarQueryParams.Add("parent_account_id", parameterToString(localVarOptionals.ParentAccountId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityAccountId.IsSet() {
+		localVarQueryParams.Add("parent_entity_account_id", parameterToString(localVarOptionals.ParentEntityAccountId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentOrgId.IsSet() {
-		localVarQueryParams.Add("parent_org_id", parameterToString(localVarOptionals.ParentOrgId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityOrgId.IsSet() {
+		localVarQueryParams.Add("parent_entity_org_id", parameterToString(localVarOptionals.ParentEntityOrgId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentProjectId.IsSet() {
-		localVarQueryParams.Add("parent_project_id", parameterToString(localVarOptionals.ParentProjectId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityProjectId.IsSet() {
+		localVarQueryParams.Add("parent_entity_project_id", parameterToString(localVarOptionals.ParentEntityProjectId.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -406,11 +406,11 @@ Retrieves stable version of Template at Project scope.
      * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
      * @param "IncludeYaml" (optional.Bool) -  Use it to get Template along with Input Set YAML
      * @param "BranchName" (optional.String) -  Name of the branch
-     * @param "ParentConnectorRef" (optional.String) -  Connector ref of parent template if its remote
-     * @param "ParentRepoName" (optional.String) -  Repo name of parent template if its remote
-     * @param "ParentAccountId" (optional.String) -  Account name of parent template if its remote
-     * @param "ParentOrgId" (optional.String) -  Organization name of parent template if its remote
-     * @param "ParentProjectId" (optional.String) -  Project name of parent entity if its remote
+     * @param "ParentEntityConnectorRef" (optional.String) -  Connector ref of parent template if its remote
+     * @param "ParentEntityRepoName" (optional.String) -  Repo name of parent template if its remote
+     * @param "ParentEntityAccountId" (optional.String) -  Account name of parent template if its remote
+     * @param "ParentEntityOrgId" (optional.String) -  Organization name of parent template if its remote
+     * @param "ParentEntityProjectId" (optional.String) -  Project name of parent entity if its remote
 @return TemplateWithInputsResponse
 */
 
@@ -418,11 +418,11 @@ type ProjectTemplateApiGetTemplateStableProjectOpts struct {
     HarnessAccount optional.String
     IncludeYaml optional.Bool
     BranchName optional.String
-    ParentConnectorRef optional.String
-    ParentRepoName optional.String
-    ParentAccountId optional.String
-    ParentOrgId optional.String
-    ParentProjectId optional.String
+    ParentEntityConnectorRef optional.String
+    ParentEntityRepoName optional.String
+    ParentEntityAccountId optional.String
+    ParentEntityOrgId optional.String
+    ParentEntityProjectId optional.String
 }
 
 func (a *ProjectTemplateApiService) GetTemplateStableProject(ctx context.Context, org string, project string, template string, localVarOptionals *ProjectTemplateApiGetTemplateStableProjectOpts) (TemplateWithInputsResponse, *http.Response, error) {
@@ -450,20 +450,20 @@ func (a *ProjectTemplateApiService) GetTemplateStableProject(ctx context.Context
 	if localVarOptionals != nil && localVarOptionals.BranchName.IsSet() {
 		localVarQueryParams.Add("branch_name", parameterToString(localVarOptionals.BranchName.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentConnectorRef.IsSet() {
-		localVarQueryParams.Add("parent_connector_ref", parameterToString(localVarOptionals.ParentConnectorRef.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityConnectorRef.IsSet() {
+		localVarQueryParams.Add("parent_entity_connector_ref", parameterToString(localVarOptionals.ParentEntityConnectorRef.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentRepoName.IsSet() {
-		localVarQueryParams.Add("parent_repo_name", parameterToString(localVarOptionals.ParentRepoName.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityRepoName.IsSet() {
+		localVarQueryParams.Add("parent_entity_repo_name", parameterToString(localVarOptionals.ParentEntityRepoName.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentAccountId.IsSet() {
-		localVarQueryParams.Add("parent_account_id", parameterToString(localVarOptionals.ParentAccountId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityAccountId.IsSet() {
+		localVarQueryParams.Add("parent_entity_account_id", parameterToString(localVarOptionals.ParentEntityAccountId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentOrgId.IsSet() {
-		localVarQueryParams.Add("parent_org_id", parameterToString(localVarOptionals.ParentOrgId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityOrgId.IsSet() {
+		localVarQueryParams.Add("parent_entity_org_id", parameterToString(localVarOptionals.ParentEntityOrgId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ParentProjectId.IsSet() {
-		localVarQueryParams.Add("parent_project_id", parameterToString(localVarOptionals.ParentProjectId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ParentEntityProjectId.IsSet() {
+		localVarQueryParams.Add("parent_entity_project_id", parameterToString(localVarOptionals.ParentEntityProjectId.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -561,7 +561,7 @@ Retrieves list of Template with meta-data at Project scope.
      * @param "Identifiers" (optional.Interface of []string) -  Template Ids for Filtering
      * @param "Description" (optional.String) -  Filter properties description
      * @param "EntityTypes" (optional.Interface of []string) -  Type of Template
-     * @param "ChildTypes" (optional.Interface of []string) -  Template Child Types for filtering
+     * @param "ChildTypes" (optional.Interface of []string) -  Child types describe the type of Step or stage
 @return []TemplateMetadataSummaryResponse
 */
 

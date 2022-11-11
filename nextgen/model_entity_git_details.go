@@ -1,7 +1,7 @@
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
- * This is the Open Api Spec 3 for the Access Control Service. This is under active development. Beware of the breaking change with respect to the generated code stub.
+ * This is the Open Api Spec 3 for the Templates Validations and Refresh. This is under active development. Beware of the breaking change with respect to the generated code stub.
  *
  * API version: 1.0
  * Contact: contact@harness.io
@@ -12,7 +12,7 @@ package nextgen
 // Git Experience related details of the Entity.
 type EntityGitDetails struct {
 	// Entity identifier
-	EntityIdentifier string `json:"entity_identifier,omitempty"`
+	ObjectId string `json:"object_id,omitempty"`
 	// Name of the branch.
 	BranchName string `json:"branch_name,omitempty"`
 	// File path of the Entity in the repository.
