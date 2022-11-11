@@ -110,11 +110,11 @@ Name | Type | Description  | Notes
  **harnessAccount** | **optional.String**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
  **includeYaml** | **optional.Bool**| Use it to get Template along with Input Set YAML | 
  **branchName** | **optional.String**| Name of the branch | 
- **parentConnectorRef** | **optional.String**| Connector ref of parent template if its remote | 
- **parentRepoName** | **optional.String**| Repo name of parent template if its remote | 
- **parentAccountId** | **optional.String**| Account name of parent template if its remote | 
- **parentOrgId** | **optional.String**| Organization name of parent template if its remote | 
- **parentProjectId** | **optional.String**| Project name of parent entity if its remote | 
+ **parentEntityConnectorRef** | **optional.String**| Connector ref of parent template if its remote | 
+ **parentEntityRepoName** | **optional.String**| Repo name of parent template if its remote | 
+ **parentEntityAccountId** | **optional.String**| Account name of parent template if its remote | 
+ **parentEntityOrgId** | **optional.String**| Organization name of parent template if its remote | 
+ **parentEntityProjectId** | **optional.String**| Project name of parent entity if its remote | 
 
 ### Return type
 
@@ -153,11 +153,11 @@ Name | Type | Description  | Notes
  **harnessAccount** | **optional.String**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. | 
  **includeYaml** | **optional.Bool**| Use it to get Template along with Input Set YAML | 
  **branchName** | **optional.String**| Name of the branch | 
- **parentConnectorRef** | **optional.String**| Connector ref of parent template if its remote | 
- **parentRepoName** | **optional.String**| Repo name of parent template if its remote | 
- **parentAccountId** | **optional.String**| Account name of parent template if its remote | 
- **parentOrgId** | **optional.String**| Organization name of parent template if its remote | 
- **parentProjectId** | **optional.String**| Project name of parent entity if its remote | 
+ **parentEntityConnectorRef** | **optional.String**| Connector ref of parent template if its remote | 
+ **parentEntityRepoName** | **optional.String**| Repo name of parent template if its remote | 
+ **parentEntityAccountId** | **optional.String**| Account name of parent template if its remote | 
+ **parentEntityOrgId** | **optional.String**| Organization name of parent template if its remote | 
+ **parentEntityProjectId** | **optional.String**| Project name of parent entity if its remote | 
 
 ### Return type
 
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
  **identifiers** | [**optional.Interface of []string**](string.md)| Template Ids for Filtering | 
  **description** | **optional.String**| Filter properties description | 
  **entityTypes** | [**optional.Interface of []string**](string.md)| Type of Template | 
- **childTypes** | [**optional.Interface of []string**](string.md)| Template Child Types for filtering | 
+ **childTypes** | [**optional.Interface of []string**](string.md)| Child types describe the type of Step or stage | 
 
 ### Return type
 

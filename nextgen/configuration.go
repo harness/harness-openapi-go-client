@@ -1,7 +1,7 @@
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
- * This is the Open Api Spec 3 for the Access Control Service. This is under active development. Beware of the breaking change with respect to the generated code stub.
+ * This is the Open Api Spec 3 for the Templates Validations and Refresh. This is under active development. Beware of the breaking change with respect to the generated code stub.
  *
  * API version: 1.0
  * Contact: contact@harness.io
@@ -10,15 +10,7 @@
 package nextgen
 
 import (
-	"fmt"
-
-	"github.com/harness/harness-openapi-go-client/harness"
-	"github.com/harness/harness-openapi-go-client/helpers"
-	retryablehttp "github.com/hashicorp/go-retryablehttp"
-
-	"github.com/harness/harness-openapi-go-client/logging"
-	"github.com/harness/harness-openapi-go-client/utils"
-	log "github.com/sirupsen/logrus"
+	"net/http"
 )
 
 // contextKeys are used to identify the type of value in the context.
@@ -58,34 +50,20 @@ type APIKey struct {
 }
 
 type Configuration struct {
-	AccountId     string            `json:"accountId,omitempty"`
-	ApiKey        string            `json:"apiKey,omitempty"`
 	BasePath      string            `json:"basePath,omitempty"`
 	Host          string            `json:"host,omitempty"`
 	Scheme        string            `json:"scheme,omitempty"`
 	DefaultHeader map[string]string `json:"defaultHeader,omitempty"`
 	UserAgent     string            `json:"userAgent,omitempty"`
-	HTTPClient    *retryablehttp.Client
-	Logger        *log.Logger
-	DebugLogging  bool
+	HTTPClient    *http.Client
 }
 
 func NewConfiguration() *Configuration {
-	logger := logging.NewLogger()
-	if helpers.EnvVars.DebugEnabled.Get() == "true" {
-		logger.SetLevel(log.DebugLevel)
-	}
-
 	cfg := &Configuration{
-		AccountId:     helpers.EnvVars.AccountId.Get(),
-		ApiKey:        helpers.EnvVars.PlatformApiKey.Get(),
-		BasePath:      helpers.EnvVars.Endpoint.GetWithDefault(utils.BaseUrl),
+		BasePath:      "http://app.harness.io",
 		DefaultHeader: make(map[string]string),
-		HTTPClient:    utils.GetDefaultHttpClient(logger),
-		Logger:        logger,
-		UserAgent:     fmt.Sprintf("%s-%s", harness.SDKName, harness.SDKVersion),
+		UserAgent:     "Swagger-Codegen/1.0.0/go",
 	}
-
 	return cfg
 }
 
