@@ -18,7 +18,6 @@ import (
 	"strings"
 	"fmt"
 	"github.com/antihax/optional"
-	"os"
 )
 
 // Linger please

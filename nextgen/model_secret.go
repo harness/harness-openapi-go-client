@@ -9,6 +9,8 @@
  */
 package nextgen
 
+import "encoding/json"
+
 type Secret struct {
 	// Secret name
 	Name string `json:"name"`
@@ -22,5 +24,17 @@ type Secret struct {
 	Tags map[string]string `json:"tags,omitempty"`
 	// Secret description
 	Description string `json:"description,omitempty"`
-	Spec *SecretSpec `json:"spec"`
+
+    Spec                         json.RawMessage               `json:"spec"`
+    SecretSpec                   *SecretSpec                   `json:"-"`
+    SshKeyPathSpec               *SshKeyPathSpec               `json:"-"`
+    SshKeyReferenceSpec          *SshKeyReferenceSpec          `json:"-"`
+    SshPasswordSpec              *SshPasswordSpec              `json:"-"`
+    SshKerberosTgtKeyTabFileSpec *SshKerberosTgtKeyTabFileSpec `json:"-"`
+    SshKerberosTgtPasswordSpec   *SshKerberosTgtPasswordSpec   `json:"-"`
+    SecretFileSpec               *SecretFileSpec               `json:"-"`
+    SecretTextSpec               *SecretTextSpec               `json:"-"`
+    WinRmTgtKeyTabFileSpec       *WinRmTgtKeyTabFileSpec       `json:"-"`
+    WinRmTgtPasswordSpec         *WinRmTgtPasswordSpec         `json:"-"`
+    WinRmNtlmSpec                *WinRmNtlmSpec                `json:"-"`
 }
