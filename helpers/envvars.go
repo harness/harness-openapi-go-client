@@ -8,12 +8,12 @@ var EnvVars = struct {
 	AccountId      EnvVar
 	Endpoint       EnvVar
 	PlatformApiKey EnvVar
-	DebugEnabled   EnvVar
+	TfLog          EnvVar
 }{
 	AccountId:      "HARNESS_ACCOUNT_ID",
 	Endpoint:       "HARNESS_ENDPOINT",
 	PlatformApiKey: "HARNESS_PLATFORM_API_KEY",
-	DebugEnabled:   "HARNESS_DEBUG_ENABLED",
+	TfLog:          "TF_LOG",
 }
 
 func (e EnvVar) String() string {
