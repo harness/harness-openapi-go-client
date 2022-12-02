@@ -6,9 +6,9 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httputil"
+	"regexp"
 	"strings"
 
-	"github.com/harness/harness-openapi-go-client/helpers"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -47,10 +47,8 @@ func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
 }
 
 func MaskAPIKey(stringToMask string) string {
-	platformApiKey := helpers.EnvVars.PlatformApiKey.Get()
-	if platformApiKey != "" {
-		stringToMask = strings.ReplaceAll(stringToMask, platformApiKey, "****")
-	}
+	reg := regexp.MustCompile(`X-Api-Key: ([a-zA-Z0-9.+-=]+)`)
+	stringToMask = reg.ReplaceAllString(stringToMask, "X-Api-Key: ****")
 	return stringToMask
 }
 
