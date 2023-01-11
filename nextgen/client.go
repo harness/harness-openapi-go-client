@@ -64,6 +64,8 @@ type APIClient struct {
 
 	FilterResourceGroupsApi *FilterResourceGroupsApiService
 
+	InputSetsApi *InputSetsApiService
+
 	OrgConnectorApi *OrgConnectorApiService
 
 	OrgProjectApi *OrgProjectApiService
