@@ -133,6 +133,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OrganizationApi = (*OrganizationApiService)(&c.common)
 	c.OrganizationResourceGroupsApi = (*OrganizationResourceGroupsApiService)(&c.common)
 	c.OrganizationRolesApi = (*OrganizationRolesApiService)(&c.common)
+	c.InputSetsApi = (*InputSetsApiService)(&c.common)
 	c.PipelinesApi = (*PipelinesApiService)(&c.common)
 	c.ProjectConnectorApi = (*ProjectConnectorApiService)(&c.common)
 	c.ProjectEnvironmentsApi = (*ProjectEnvironmentsApiService)(&c.common)
