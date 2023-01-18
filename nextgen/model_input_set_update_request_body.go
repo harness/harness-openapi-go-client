@@ -14,7 +14,7 @@ type InputSetUpdateRequestBody struct {
 	// Input Set YAML (to be passed as a String).
 	InputSetYaml string `json:"input_set_yaml"`
 	// Input Set identifier
-	Slug string `json:"slug"`
+	Identifier string `json:"identifier"`
 	// Input Set name
 	Name string `json:"name"`
 	// Input Set description
