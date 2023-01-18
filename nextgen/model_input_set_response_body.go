@@ -14,7 +14,7 @@ type InputSetResponseBody struct {
 	// Input Set YAML (returned as a String).
 	InputSetYaml string `json:"input_set_yaml,omitempty"`
 	// Input Set identifier
-	Slug string `json:"slug,omitempty"`
+	Identifier string `json:"identifier,omitempty"`
 	// Input Set name
 	Name string `json:"name,omitempty"`
 	// Organization identifier
