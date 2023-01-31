@@ -17,6 +17,7 @@ type TemplateMetadataSummaryResponse struct {
 	Org string `json:"org,omitempty"`
 	// Project identifier
 	Project string `json:"project,omitempty"`
+	Slug    string `json:"slug,omitempty"`
 	// Template identifier
 	Identifier string `json:"identifier,omitempty"`
 	// Template Name
