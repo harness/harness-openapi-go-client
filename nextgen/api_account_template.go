@@ -149,12 +149,13 @@ Deletes particular version of Template at Account scope.
  * @param optional nil or *AccountTemplateApiDeleteTemplateAccOpts - Optional Parameters:
      * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
      * @param "Comments" (optional.String) -  Specify comment with respect to changes  
-
+     * @param "ForceDelete" (optional.Bool) -  Enable this field to force delete a template
 */
 
 type AccountTemplateApiDeleteTemplateAccOpts struct {
     HarnessAccount optional.String
     Comments optional.String
+    ForceDelete optional.Bool
 }
 
 func (a *AccountTemplateApiService) DeleteTemplateAcc(ctx context.Context, template string, version string, localVarOptionals *AccountTemplateApiDeleteTemplateAccOpts) (*http.Response, error) {
@@ -178,6 +179,11 @@ func (a *AccountTemplateApiService) DeleteTemplateAcc(ctx context.Context, templ
 	if localVarOptionals != nil && localVarOptionals.Comments.IsSet() {
 		localVarQueryParams.Add("comments", parameterToString(localVarOptionals.Comments.Value(), ""))
 	}
+
+	if localVarOptionals != nil && localVarOptionals.ForceDelete.IsSet() {
+    	localVarQueryParams.Add("forceDelete", parameterToString(localVarOptionals.ForceDelete.Value(), ""))
+    }
+
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
