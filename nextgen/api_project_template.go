@@ -154,13 +154,15 @@ Deletes particular version of Template at Project scope.
  * @param version Version Label for Template
  * @param optional nil or *ProjectTemplateApiDeleteTemplateProjectOpts - Optional Parameters:
      * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
-     * @param "Comments" (optional.String) -  Specify comment with respect to changes  
+     * @param "Comments" (optional.String) -  Specify comment with respect to changes
+     * @param "ForceDelete" (optional.Bool) -  Enable this field to force delete a template
 
 */
 
 type ProjectTemplateApiDeleteTemplateProjectOpts struct {
     HarnessAccount optional.String
     Comments optional.String
+    ForceDelete optional.Bool
 }
 
 func (a *ProjectTemplateApiService) DeleteTemplateProject(ctx context.Context, project string, template string, org string, version string, localVarOptionals *ProjectTemplateApiDeleteTemplateProjectOpts) (*http.Response, error) {
@@ -186,6 +188,11 @@ func (a *ProjectTemplateApiService) DeleteTemplateProject(ctx context.Context, p
 	if localVarOptionals != nil && localVarOptionals.Comments.IsSet() {
 		localVarQueryParams.Add("comments", parameterToString(localVarOptionals.Comments.Value(), ""))
 	}
+
+	if localVarOptionals != nil && localVarOptionals.ForceDelete.IsSet() {
+    	localVarQueryParams.Add("forceDelete", parameterToString(localVarOptionals.ForceDelete.Value(), ""))
+    }
+
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
