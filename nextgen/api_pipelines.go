@@ -2,7 +2,7 @@
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
- * This is the Open Api Spec 3 for the Access Control Service. This is under active development. Beware of the breaking change with respect to the generated code stub.
+ * This is the Open Api Spec 3 for the Pipeline Service. This is under active development. Beware of the breaking change with respect to the generated code stub.
  *
  * API version: 1.0
  * Contact: contact@harness.io
@@ -34,7 +34,7 @@ Creates a Pipeline.
  * @param org Organization identifier
  * @param project Project identifier
  * @param optional nil or *PipelinesApiCreatePipelineOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 @return PipelineCreateResponseBody
 */
 
@@ -147,7 +147,7 @@ Deletes a Pipeline.
  * @param project Project identifier
  * @param pipeline Pipeline identifier
  * @param optional nil or *PipelinesApiDeletePipelineOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 
 */
 
@@ -252,11 +252,14 @@ Retrieves a Pipeline.
  * @param project Project identifier
  * @param pipeline Pipeline identifier
  * @param optional nil or *PipelinesApiGetPipelineOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
      * @param "BranchName" (optional.String) -  Name of the branch (for Git Experience).
      * @param "TemplateApplied" (optional.Bool) -  If true, returns Pipeline YAML with Templates applied on it.
      * @param "ConnectorRef" (optional.String) -  Identifier of the Harness Connector used for CRUD operations on the Entity (for Git Experience).
      * @param "RepoName" (optional.String) -  Name of the repository (for Git Experience).
+     * @param "LoadFromCache" (optional.String) -  Flag to enable loading the remote pipeline from git or git cache
+     * @param "LoadFromFallbackBranch" (optional.Bool) -  Flag to load the pipeline from the created non default branch
+     * @param "ValidateAsync" (optional.Bool) -  Flag to tell whether to start an asynchronous validation process or not
 @return PipelineGetResponseBody
 */
 
@@ -266,6 +269,9 @@ type PipelinesApiGetPipelineOpts struct {
     TemplateApplied optional.Bool
     ConnectorRef optional.String
     RepoName optional.String
+    LoadFromCache optional.String
+    LoadFromFallbackBranch optional.Bool
+    ValidateAsync optional.Bool
 }
 
 func (a *PipelinesApiService) GetPipeline(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiGetPipelineOpts) (PipelineGetResponseBody, *http.Response, error) {
@@ -299,6 +305,127 @@ func (a *PipelinesApiService) GetPipeline(ctx context.Context, org string, proje
 	if localVarOptionals != nil && localVarOptionals.RepoName.IsSet() {
 		localVarQueryParams.Add("repo_name", parameterToString(localVarOptionals.RepoName.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.LoadFromFallbackBranch.IsSet() {
+		localVarQueryParams.Add("load_from_fallback_branch", parameterToString(localVarOptionals.LoadFromFallbackBranch.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ValidateAsync.IsSet() {
+		localVarQueryParams.Add("validate_async", parameterToString(localVarOptionals.ValidateAsync.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json", "application/yaml"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.HarnessAccount.IsSet() {
+		localVarHeaderParams["Harness-Account"] = parameterToString(localVarOptionals.HarnessAccount.Value(), "")
+	}
+	if localVarOptionals != nil && localVarOptionals.LoadFromCache.IsSet() {
+		localVarHeaderParams["Load-From-Cache"] = parameterToString(localVarOptionals.LoadFromCache.Value(), "")
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["x-api-key"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PipelineGetResponseBody
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+PipelinesApiService Get Pipeline Validation Result
+Get Pipeline Validation Result for given UUID
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param org Organization identifier
+ * @param project Project identifier
+ * @param uuid UUID
+ * @param optional nil or *PipelinesApiGetPipelineValidateResultOpts - Optional Parameters:
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+@return PipelineValidationResponseBody
+*/
+
+type PipelinesApiGetPipelineValidateResultOpts struct {
+    HarnessAccount optional.String
+}
+
+func (a *PipelinesApiService) GetPipelineValidateResult(ctx context.Context, org string, project string, uuid string, localVarOptionals *PipelinesApiGetPipelineValidateResultOpts) (PipelineValidationResponseBody, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue PipelineValidationResponseBody
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/projects/{project}/pipelines/validate/{uuid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", fmt.Sprintf("%v", org), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", fmt.Sprintf("%v", project), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uuid"+"}", fmt.Sprintf("%v", uuid), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -362,7 +489,127 @@ func (a *PipelinesApiService) GetPipeline(ctx context.Context, org string, proje
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v PipelineGetResponseBody
+			var v PipelineValidationResponseBody
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+PipelinesApiService Get Pipeline YAML from Git Repository
+Fetches Pipeline YAML from Git Repository and saves a record for it in Harness
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param org Organization identifier
+ * @param project Project identifier
+ * @param pipeline Pipeline identifier
+ * @param optional nil or *PipelinesApiImportPipelineFromGitOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of PipelineImportRequestBody) -  Pipeline import request body
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+@return PipelineSaveResponseBody
+*/
+
+type PipelinesApiImportPipelineFromGitOpts struct {
+    Body optional.Interface
+    HarnessAccount optional.String
+}
+
+func (a *PipelinesApiService) ImportPipelineFromGit(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiImportPipelineFromGitOpts) (PipelineSaveResponseBody, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue PipelineSaveResponseBody
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/projects/{project}/pipelines/{pipeline}/import"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", fmt.Sprintf("%v", org), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", fmt.Sprintf("%v", project), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pipeline"+"}", fmt.Sprintf("%v", pipeline), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.HarnessAccount.IsSet() {
+		localVarHeaderParams["Harness-Account"] = parameterToString(localVarOptionals.HarnessAccount.Value(), "")
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		
+		localVarOptionalBody:= localVarOptionals.Body.Value()
+		localVarPostBody = &localVarOptionalBody
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["x-api-key"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PipelineSaveResponseBody
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -383,7 +630,7 @@ Returns a list of Pipelines.
  * @param org Organization identifier
  * @param project Project identifier
  * @param optional nil or *PipelinesApiListPipelinesOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
      * @param "Page" (optional.Int32) -  Pagination page number strategy: Specify the page number within the paginated collection related to the number of items on each page.
      * @param "Limit" (optional.Int32) -  Pagination: Number of items to return.
      * @param "SearchTerm" (optional.String) -  This would be used to filter resources having attributes matching the search term.
@@ -395,10 +642,10 @@ Returns a list of Pipelines.
      * @param "Name" (optional.String) -  Pipeline Name on the basis of which the Pipelines are filtered.
      * @param "Description" (optional.String) -  Pipeline Description on the basis of which the Pipelines are filtered.
      * @param "Tags" (optional.Interface of []string) -  Filter tags as a key:value pair.
-     * @param "ServiceNames" (optional.Interface of []string) -  Service names on the basis of which the Pipelines are filtered.
-     * @param "EnvNames" (optional.Interface of []string) -  Names of Environments on the basis of which the Pipelines are filtered.
-     * @param "DeploymentType" (optional.String) -  Deployment type on the basis of which the Pipelines are filtered.
-     * @param "Repository" (optional.String) -  Repository name on the basis of which the Pipelines are filtered.
+     * @param "ServiceNames" (optional.Interface of []string) -  Service names on the basis of which the Pipelines are filtered. [CD]
+     * @param "EnvNames" (optional.Interface of []string) -  Names of Environments on the basis of which the Pipelines are filtered. [CD]
+     * @param "DeploymentType" (optional.String) -  Deployment type on the basis of which the Pipelines are filtered. [CD]
+     * @param "Repository" (optional.String) -  Repository name on the basis of which the Pipelines are filtered. [CI]
 @return []PipelineListResponseBody
 */
 
@@ -562,6 +809,263 @@ func (a *PipelinesApiService) ListPipelines(ctx context.Context, org string, pro
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
+PipelinesApiService Move Pipeline YAML from inline to remote
+Creates a remote entity by fetching pipeline YAML from Harness.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param org Organization identifier
+ * @param project Project identifier
+ * @param pipeline Pipeline identifier
+ * @param optional nil or *PipelinesApiMoveConfigOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of PipelineMoveConfigRequestBody) - 
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+@return PipelineMoveConfigResponseBody
+*/
+
+type PipelinesApiMoveConfigOpts struct {
+    Body optional.Interface
+    HarnessAccount optional.String
+}
+
+func (a *PipelinesApiService) MoveConfig(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiMoveConfigOpts) (PipelineMoveConfigResponseBody, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue PipelineMoveConfigResponseBody
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/projects/{project}/pipelines/{pipeline}/move-config"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", fmt.Sprintf("%v", org), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", fmt.Sprintf("%v", project), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pipeline"+"}", fmt.Sprintf("%v", pipeline), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.HarnessAccount.IsSet() {
+		localVarHeaderParams["Harness-Account"] = parameterToString(localVarOptionals.HarnessAccount.Value(), "")
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		
+		localVarOptionalBody:= localVarOptionals.Body.Value()
+		localVarPostBody = &localVarOptionalBody
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["x-api-key"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PipelineMoveConfigResponseBody
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+PipelinesApiService Start a Pipeline Validation Event
+Starts a Pipeline Validation Event and returns the UUID of the Event created
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param org Organization identifier
+ * @param project Project identifier
+ * @param pipeline Pipeline identifier
+ * @param optional nil or *PipelinesApiStartPipelineValidationEventOpts - Optional Parameters:
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+     * @param "BranchName" (optional.String) -  Name of the branch (for Git Experience).
+     * @param "ConnectorRef" (optional.String) -  Identifier of the Harness Connector used for CRUD operations on the Entity (for Git Experience).
+     * @param "RepoName" (optional.String) -  Name of the repository (for Git Experience).
+     * @param "LoadFromCache" (optional.Bool) -  Flag to enable loading the remote pipeline from git or git cache
+     * @param "LoadFromFallbackBranch" (optional.Bool) -  Flag to load the pipeline from the created non default branch
+@return PipelineValidationUuidResponseBody
+*/
+
+type PipelinesApiStartPipelineValidationEventOpts struct {
+    HarnessAccount optional.String
+    BranchName optional.String
+    ConnectorRef optional.String
+    RepoName optional.String
+    LoadFromCache optional.Bool
+    LoadFromFallbackBranch optional.Bool
+}
+
+func (a *PipelinesApiService) StartPipelineValidationEvent(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiStartPipelineValidationEventOpts) (PipelineValidationUuidResponseBody, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue PipelineValidationUuidResponseBody
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/projects/{project}/pipelines/{pipeline}/validate"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", fmt.Sprintf("%v", org), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", fmt.Sprintf("%v", project), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pipeline"+"}", fmt.Sprintf("%v", pipeline), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.BranchName.IsSet() {
+		localVarQueryParams.Add("branch_name", parameterToString(localVarOptionals.BranchName.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ConnectorRef.IsSet() {
+		localVarQueryParams.Add("connector_ref", parameterToString(localVarOptionals.ConnectorRef.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.RepoName.IsSet() {
+		localVarQueryParams.Add("repo_name", parameterToString(localVarOptionals.RepoName.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.LoadFromFallbackBranch.IsSet() {
+		localVarQueryParams.Add("load_from_fallback_branch", parameterToString(localVarOptionals.LoadFromFallbackBranch.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json", "application/yaml"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.HarnessAccount.IsSet() {
+		localVarHeaderParams["Harness-Account"] = parameterToString(localVarOptionals.HarnessAccount.Value(), "")
+	}
+	if localVarOptionals != nil && localVarOptionals.LoadFromCache.IsSet() {
+		localVarHeaderParams["Load-From-Cache"] = parameterToString(localVarOptionals.LoadFromCache.Value(), "")
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["x-api-key"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PipelineValidationUuidResponseBody
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
 PipelinesApiService Update a Pipeline
 Updates a Pipeline.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -570,7 +1074,7 @@ Updates a Pipeline.
  * @param project Project identifier
  * @param pipeline Pipeline identifier
  * @param optional nil or *PipelinesApiUpdatePipelineOpts - Optional Parameters:
-     * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 @return PipelineCreateResponseBody
 */
 
@@ -663,6 +1167,126 @@ func (a *PipelinesApiService) UpdatePipeline(ctx context.Context, body PipelineU
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PipelineCreateResponseBody
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+PipelinesApiService Update GitMetadata for Remote Pipelines
+Update git-metadata in remote pipeline
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param org Organization identifier
+ * @param project Project identifier
+ * @param pipeline Pipeline identifier
+ * @param optional nil or *PipelinesApiUpdatePipelineGitMetadataOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of GitMetadataUpdateRequestBody) - 
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+@return GitMetadataUpdateResponseBody
+*/
+
+type PipelinesApiUpdatePipelineGitMetadataOpts struct {
+    Body optional.Interface
+    HarnessAccount optional.String
+}
+
+func (a *PipelinesApiService) UpdatePipelineGitMetadata(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiUpdatePipelineGitMetadataOpts) (GitMetadataUpdateResponseBody, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Put")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue GitMetadataUpdateResponseBody
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/projects/{project}/pipelines/{pipeline}/git-metadata"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", fmt.Sprintf("%v", org), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", fmt.Sprintf("%v", project), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pipeline"+"}", fmt.Sprintf("%v", pipeline), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.HarnessAccount.IsSet() {
+		localVarHeaderParams["Harness-Account"] = parameterToString(localVarOptionals.HarnessAccount.Value(), "")
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		
+		localVarOptionalBody:= localVarOptionals.Body.Value()
+		localVarPostBody = &localVarOptionalBody
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["x-api-key"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v GitMetadataUpdateResponseBody
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
