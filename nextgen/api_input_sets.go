@@ -270,6 +270,9 @@ type InputSetsApiGetInputSetOpts struct {
 	BranchName               optional.String
 	ParentEntityConnectorRef optional.String
 	ParentEntityRepoName     optional.String
+	LoadFromCache optional.String
+    LoadFromFallbackBranch optional.Bool
+    ValidateAsync optional.Bool
 }
 
 func (a *InputSetsApiService) GetInputSet(ctx context.Context, org string, project string, inputSet string, pipeline string, localVarOptionals *InputSetsApiGetInputSetOpts) (InputSetResponseBody, *http.Response, error) {
@@ -301,6 +304,12 @@ func (a *InputSetsApiService) GetInputSet(ctx context.Context, org string, proje
 	if localVarOptionals != nil && localVarOptionals.ParentEntityRepoName.IsSet() {
 		localVarQueryParams.Add("parent_entity_repo_name", parameterToString(localVarOptionals.ParentEntityRepoName.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.LoadFromFallbackBranch.IsSet() {
+		localVarQueryParams.Add("load_from_fallback_branch", parameterToString(localVarOptionals.LoadFromFallbackBranch.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ValidateAsync.IsSet() {
+		localVarQueryParams.Add("validate_async", parameterToString(localVarOptionals.ValidateAsync.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -320,6 +329,9 @@ func (a *InputSetsApiService) GetInputSet(ctx context.Context, org string, proje
 	}
 	if localVarOptionals != nil && localVarOptionals.HarnessAccount.IsSet() {
 		localVarHeaderParams["Harness-Account"] = parameterToString(localVarOptionals.HarnessAccount.Value(), "")
+	}
+	if localVarOptionals != nil && localVarOptionals.LoadFromCache.IsSet() {
+		localVarHeaderParams["Load-From-Cache"] = parameterToString(localVarOptionals.LoadFromCache.Value(), "")
 	}
 	if ctx != nil {
 		// API Key Authentication
@@ -372,6 +384,239 @@ func (a *InputSetsApiService) GetInputSet(ctx context.Context, org string, proje
 			}
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+InputSetsApiService Get InputSets Validation Result
+Get InputSet Validation Result for given UUID
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param org Organization identifier
+ * @param project Project identifier
+ * @param uuid UUID
+ * @param optional nil or *InputSetsApiGetInputSetsValidateResultOpts - Optional Parameters:
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+@return InputSetValidationResponseBody
+*/
+
+type InputSetsApiGetInputSetsValidateResultOpts struct {
+    HarnessAccount optional.String
+}
+
+func (a *InputSetsApiService) GetInputSetsValidateResult(ctx context.Context, org string, project string, uuid string, localVarOptionals *InputSetsApiGetInputSetsValidateResultOpts) (InputSetValidationResponseBody, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue InputSetValidationResponseBody
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/projects/{project}/pipelines/validate/{uuid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", fmt.Sprintf("%v", org), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", fmt.Sprintf("%v", project), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uuid"+"}", fmt.Sprintf("%v", uuid), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json", "application/yaml"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.HarnessAccount.IsSet() {
+		localVarHeaderParams["Harness-Account"] = parameterToString(localVarOptionals.HarnessAccount.Value(), "")
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["x-api-key"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v InputSetValidationResponseBody
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+InputSetsApiService Get InputSets YAML from Git Repository
+Fetches InputSets YAML from Git Repository and saves a record for it in Harness
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param org Organization identifier
+ * @param project Project identifier
+ * @param pipeline Pipeline identifier
+ * @param optional nil or *InputSetsApiImportInputSetsFromGitOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of InputSetsImportRequestBody) -  Pipeline import request body
+     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+@return InputSetSaveResponseBody
+*/
+
+type InputSetsApiImportInputSetsFromGitOpts struct {
+    Body optional.Interface
+    HarnessAccount optional.String
+}
+
+func (a *InputSetsApiService) ImportInputSetsFromGit(ctx context.Context, org string, project string, pipeline string, localVarOptionals *InputSetsApiImportInputSetsFromGitOpts) (InputSetSaveResponseBody, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue InputSetSaveResponseBody
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/projects/{project}/pipelines/{pipeline}/import"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", fmt.Sprintf("%v", org), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", fmt.Sprintf("%v", project), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pipeline"+"}", fmt.Sprintf("%v", pipeline), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.HarnessAccount.IsSet() {
+		localVarHeaderParams["Harness-Account"] = parameterToString(localVarOptionals.HarnessAccount.Value(), "")
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		
+		localVarOptionalBody:= localVarOptionals.Body.Value()
+		localVarPostBody = &localVarOptionalBody
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["x-api-key"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v InputSetSaveResponseBody
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
