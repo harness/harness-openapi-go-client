@@ -521,7 +521,7 @@ type InputSetsApiImportInputSetsFromGitOpts struct {
     HarnessAccount optional.String
 }
 
-func (a *InputSetsApiService) ImportInputSetsFromGit(ctx context.Context, org string, project string, inputSet string, localVarOptionals *InputSetsApiImportInputSetsFromGitOpts) (InputSetSaveResponseBody, *http.Response, error) {
+func (a *InputSetsApiService) ImportInputSetsFromGit(ctx context.Context, org string, project string, pipeline string, inputSet string, localVarOptionals *InputSetsApiImportInputSetsFromGitOpts) (InputSetSaveResponseBody, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -539,6 +539,9 @@ func (a *InputSetsApiService) ImportInputSetsFromGit(ctx context.Context, org st
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+
+	// set pipeline_id as the query parameter.
+	localVarQueryParams.Add("pipeline", parameterToString(pipeline, ""))
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json"}
