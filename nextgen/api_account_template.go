@@ -559,7 +559,7 @@ func (a *AccountTemplateApiService) ImportAccountLevelTemplatesFromGit(ctx conte
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "//v1/templates/{template}/import"
+	localVarPath := a.client.cfg.BasePath + "/v1/templates/{template}/import"
 	localVarPath = strings.Replace(localVarPath, "{"+"template"+"}", fmt.Sprintf("%v", template), -1)
 
 	localVarHeaderParams := make(map[string]string)

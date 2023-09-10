@@ -558,7 +558,7 @@ type TemplatesApiImportOrgTemplatesFromGitOpts struct {
     HarnessAccount optional.String
 }
 
-func (a *OrgTemplateApiService) ImportOrgTemplatesFromGit(ctx context.Context, org string, template string, localVarOptionals *InputSetsApiImportInputSetsFromGitOpts) (TemplatesSaveResponseBody, *http.Response, error) {
+func (a *OrgTemplateApiService) ImportOrgTemplatesFromGit(ctx context.Context, org string, template string, localVarOptionals *TemplatesApiImportOrgTemplatesFromGitOpts) (TemplatesSaveResponseBody, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -568,7 +568,7 @@ func (a *OrgTemplateApiService) ImportOrgTemplatesFromGit(ctx context.Context, o
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/projects/{project}/input-sets/{input-set}/import"
+	localVarPath := a.client.cfg.BasePath + "/v1/orgs/{org}/templates/{template}/import"
 	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", fmt.Sprintf("%v", org), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"template"+"}", fmt.Sprintf("%v", template), -1)
 
