@@ -270,9 +270,9 @@ type InputSetsApiGetInputSetOpts struct {
 	BranchName               optional.String
 	ParentEntityConnectorRef optional.String
 	ParentEntityRepoName     optional.String
-	LoadFromCache optional.String
-    LoadFromFallbackBranch optional.Bool
-    ValidateAsync optional.Bool
+	LoadFromCache            optional.String
+	LoadFromFallbackBranch   optional.Bool
+	ValidateAsync            optional.Bool
 }
 
 func (a *InputSetsApiService) GetInputSet(ctx context.Context, org string, project string, inputSet string, pipeline string, localVarOptionals *InputSetsApiGetInputSetOpts) (InputSetResponseBody, *http.Response, error) {
