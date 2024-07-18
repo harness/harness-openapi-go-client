@@ -404,15 +404,15 @@ Get InputSet Validation Result for given UUID
 */
 
 type InputSetsApiGetInputSetsValidateResultOpts struct {
-    HarnessAccount optional.String
+	HarnessAccount optional.String
 }
 
 func (a *InputSetsApiService) GetInputSetsValidateResult(ctx context.Context, org string, project string, uuid string, localVarOptionals *InputSetsApiGetInputSetsValidateResultOpts) (InputSetValidationResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue InputSetValidationResponseBody
 	)
 
@@ -456,7 +456,7 @@ func (a *InputSetsApiService) GetInputSetsValidateResult(ctx context.Context, or
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -477,32 +477,33 @@ func (a *InputSetsApiService) GetInputSetsValidateResult(ctx context.Context, or
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v InputSetValidationResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 InputSetsApiService Get InputSets YAML from Git Repository
 Fetches InputSets YAML from Git Repository and saves a record for it in Harness
@@ -517,16 +518,16 @@ Fetches InputSets YAML from Git Repository and saves a record for it in Harness
 */
 
 type InputSetsApiImportInputSetsFromGitOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *InputSetsApiService) ImportInputSetsFromGit(ctx context.Context, org string, project string, pipeline string, inputSet string, localVarOptionals *InputSetsApiImportInputSetsFromGitOpts) (InputSetSaveResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue InputSetSaveResponseBody
 	)
 
@@ -565,8 +566,8 @@ func (a *InputSetsApiService) ImportInputSetsFromGit(ctx context.Context, org st
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -579,7 +580,7 @@ func (a *InputSetsApiService) ImportInputSetsFromGit(ctx context.Context, org st
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -600,26 +601,26 @@ func (a *InputSetsApiService) ImportInputSetsFromGit(ctx context.Context, org st
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v InputSetSaveResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
@@ -768,26 +769,27 @@ func (a *InputSetsApiService) ListInputSets(ctx context.Context, org string, pro
 /*
 InputSetsApiService Move InputSet YAML from inline to remote
 Creates a remote entity by fetching InputSet YAML from Harness.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param org Organization identifier
- * @param project Project identifier
- * @param inputset InputSet identifier
- * @param optional nil or *InputSetsApiMoveConfigOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of InputSetsMoveConfigRequestBody) - 
-     * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param org Organization identifier
+  - @param project Project identifier
+  - @param inputset InputSet identifier
+  - @param optional nil or *InputSetsApiMoveConfigOpts - Optional Parameters:
+  - @param "Body" (optional.Interface of InputSetsMoveConfigRequestBody) -
+  - @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
+
 @return InputSetsMoveConfigResponseBody
 */
 type InputSetsApiMoveConfigOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *InputSetsApiService) MoveConfig(ctx context.Context, org string, project string, inputSet string, localVarOptionals *InputSetsApiMoveConfigOpts) (InputSetsMoveConfigResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue InputSetsMoveConfigResponseBody
 	)
 
@@ -823,8 +825,8 @@ func (a *InputSetsApiService) MoveConfig(ctx context.Context, org string, projec
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -837,7 +839,7 @@ func (a *InputSetsApiService) MoveConfig(ctx context.Context, org string, projec
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -858,26 +860,26 @@ func (a *InputSetsApiService) MoveConfig(ctx context.Context, org string, projec
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PipelineMoveConfigResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
@@ -1011,22 +1013,22 @@ Update git-metadata in remote inputSets
  * @param project Project identifier
  * @param inputSets InputSets identifier
  * @param optional nil or *InputSetsApiUpdateInputSetGitMetadataOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of GitMetadataUpdateRequestBody) - 
+     * @param "Body" (optional.Interface of GitMetadataUpdateRequestBody) -
      * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 @return GitMetadataUpdateResponseBody
 */
 
 type InputSetsApiUpdateInputSetGitMetadataOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
-func (a *InputSetsApiService) UpdateInputSetsGitMetadata(ctx context.Context, org string, project string, inputSet string, localVarOptionals *InputSetsApiUpdateInputSetGitMetadataOpts) (GitMetadataUpdateResponseBody, *http.Response, error) {
+func (a *InputSetsApiService) UpdateInputSetsGitMetadata(ctx context.Context, org string, project string, inputSet string, pipeline string, localVarOptionals *InputSetsApiUpdateInputSetGitMetadataOpts) (GitMetadataUpdateResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Put")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Put")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue GitMetadataUpdateResponseBody
 	)
 
@@ -1039,6 +1041,7 @@ func (a *InputSetsApiService) UpdateInputSetsGitMetadata(ctx context.Context, or
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	localVarQueryParams.Add("pipeline", parameterToString(pipeline, ""))
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json"}
@@ -1062,8 +1065,8 @@ func (a *InputSetsApiService) UpdateInputSetsGitMetadata(ctx context.Context, or
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -1076,7 +1079,7 @@ func (a *InputSetsApiService) UpdateInputSetsGitMetadata(ctx context.Context, or
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -1097,26 +1100,26 @@ func (a *InputSetsApiService) UpdateInputSetsGitMetadata(ctx context.Context, or
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v GitMetadataUpdateResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
