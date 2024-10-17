@@ -1,4 +1,3 @@
-
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
@@ -12,11 +11,12 @@ package nextgen
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
+
 	"github.com/antihax/optional"
 )
 
@@ -26,6 +26,7 @@ var (
 )
 
 type PipelinesApiService service
+
 /*
 PipelinesApiService Create a Pipeline
 Creates a Pipeline.
@@ -39,15 +40,15 @@ Creates a Pipeline.
 */
 
 type PipelinesApiCreatePipelineOpts struct {
-    HarnessAccount optional.String
+	HarnessAccount optional.String
 }
 
 func (a *PipelinesApiService) CreatePipeline(ctx context.Context, body PipelineCreateRequestBody, org string, project string, localVarOptionals *PipelinesApiCreatePipelineOpts) (PipelineCreateResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue PipelineCreateResponseBody
 	)
 
@@ -92,7 +93,7 @@ func (a *PipelinesApiService) CreatePipeline(ctx context.Context, body PipelineC
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -113,32 +114,33 @@ func (a *PipelinesApiService) CreatePipeline(ctx context.Context, body PipelineC
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
 			var v PipelineCreateResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService Delete a Pipeline
 Deletes a Pipeline.
@@ -152,7 +154,7 @@ Deletes a Pipeline.
 */
 
 type PipelinesApiDeletePipelineOpts struct {
-    HarnessAccount optional.String
+	HarnessAccount optional.String
 }
 
 func (a *PipelinesApiService) DeletePipeline(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiDeletePipelineOpts) (*http.Response, error) {
@@ -161,7 +163,6 @@ func (a *PipelinesApiService) DeletePipeline(ctx context.Context, org string, pr
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -204,7 +205,7 @@ func (a *PipelinesApiService) DeletePipeline(ctx context.Context, org string, pr
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -223,27 +224,27 @@ func (a *PipelinesApiService) DeletePipeline(ctx context.Context, org string, pr
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 400 {
 			var v interface{}
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarHttpResponse, newErr
 		}
 		return localVarHttpResponse, newErr
 	}
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService Retrieve a Pipeline
 Retrieves a Pipeline.
@@ -264,22 +265,22 @@ Retrieves a Pipeline.
 */
 
 type PipelinesApiGetPipelineOpts struct {
-    HarnessAccount optional.String
-    BranchName optional.String
-    TemplateApplied optional.Bool
-    ConnectorRef optional.String
-    RepoName optional.String
-    LoadFromCache optional.String
-    LoadFromFallbackBranch optional.Bool
-    ValidateAsync optional.Bool
+	HarnessAccount         optional.String
+	BranchName             optional.String
+	TemplateApplied        optional.Bool
+	ConnectorRef           optional.String
+	RepoName               optional.String
+	LoadFromCache          optional.String
+	LoadFromFallbackBranch optional.Bool
+	ValidateAsync          optional.Bool
 }
 
 func (a *PipelinesApiService) GetPipeline(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiGetPipelineOpts) (PipelineGetResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue PipelineGetResponseBody
 	)
 
@@ -344,7 +345,7 @@ func (a *PipelinesApiService) GetPipeline(ctx context.Context, org string, proje
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -365,32 +366,37 @@ func (a *PipelinesApiService) GetPipeline(ctx context.Context, org string, proje
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
+		}
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PipelineGetResponseBody
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v PipelineGetResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService Get Pipeline Validation Result
 Get Pipeline Validation Result for given UUID
@@ -404,15 +410,15 @@ Get Pipeline Validation Result for given UUID
 */
 
 type PipelinesApiGetPipelineValidateResultOpts struct {
-    HarnessAccount optional.String
+	HarnessAccount optional.String
 }
 
 func (a *PipelinesApiService) GetPipelineValidateResult(ctx context.Context, org string, project string, uuid string, localVarOptionals *PipelinesApiGetPipelineValidateResultOpts) (PipelineValidationResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue PipelineValidationResponseBody
 	)
 
@@ -456,7 +462,7 @@ func (a *PipelinesApiService) GetPipelineValidateResult(ctx context.Context, org
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -477,32 +483,33 @@ func (a *PipelinesApiService) GetPipelineValidateResult(ctx context.Context, org
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PipelineValidationResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService Get Pipeline YAML from Git Repository
 Fetches Pipeline YAML from Git Repository and saves a record for it in Harness
@@ -517,16 +524,16 @@ Fetches Pipeline YAML from Git Repository and saves a record for it in Harness
 */
 
 type PipelinesApiImportPipelineFromGitOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *PipelinesApiService) ImportPipelineFromGit(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiImportPipelineFromGitOpts) (PipelineSaveResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue PipelineSaveResponseBody
 	)
 
@@ -562,8 +569,8 @@ func (a *PipelinesApiService) ImportPipelineFromGit(ctx context.Context, org str
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -576,7 +583,7 @@ func (a *PipelinesApiService) ImportPipelineFromGit(ctx context.Context, org str
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -597,32 +604,33 @@ func (a *PipelinesApiService) ImportPipelineFromGit(ctx context.Context, org str
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PipelineSaveResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService List Pipelines
 Returns a list of Pipelines.
@@ -650,30 +658,30 @@ Returns a list of Pipelines.
 */
 
 type PipelinesApiListPipelinesOpts struct {
-    HarnessAccount optional.String
-    Page optional.Int32
-    Limit optional.Int32
-    SearchTerm optional.String
-    Sort optional.String
-    Order optional.String
-    Module optional.String
-    FilterIdentifier optional.String
-    PipelineIdentifiers optional.Interface
-    Name optional.String
-    Description optional.String
-    Tags optional.Interface
-    ServiceNames optional.Interface
-    EnvNames optional.Interface
-    DeploymentType optional.String
-    Repository optional.String
+	HarnessAccount      optional.String
+	Page                optional.Int32
+	Limit               optional.Int32
+	SearchTerm          optional.String
+	Sort                optional.String
+	Order               optional.String
+	Module              optional.String
+	FilterIdentifier    optional.String
+	PipelineIdentifiers optional.Interface
+	Name                optional.String
+	Description         optional.String
+	Tags                optional.Interface
+	ServiceNames        optional.Interface
+	EnvNames            optional.Interface
+	DeploymentType      optional.String
+	Repository          optional.String
 }
 
 func (a *PipelinesApiService) ListPipelines(ctx context.Context, org string, project string, localVarOptionals *PipelinesApiListPipelinesOpts) ([]PipelineListResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue []PipelineListResponseBody
 	)
 
@@ -761,7 +769,7 @@ func (a *PipelinesApiService) ListPipelines(ctx context.Context, org string, pro
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -782,32 +790,33 @@ func (a *PipelinesApiService) ListPipelines(ctx context.Context, org string, pro
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v []PipelineListResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService Move Pipeline YAML from inline to remote
 Creates a remote entity by fetching pipeline YAML from Harness.
@@ -816,22 +825,22 @@ Creates a remote entity by fetching pipeline YAML from Harness.
  * @param project Project identifier
  * @param pipeline Pipeline identifier
  * @param optional nil or *PipelinesApiMoveConfigOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of PipelineMoveConfigRequestBody) - 
+     * @param "Body" (optional.Interface of PipelineMoveConfigRequestBody) -
      * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 @return PipelineMoveConfigResponseBody
 */
 
 type PipelinesApiMoveConfigOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *PipelinesApiService) MoveConfig(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiMoveConfigOpts) (PipelineMoveConfigResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue PipelineMoveConfigResponseBody
 	)
 
@@ -867,8 +876,8 @@ func (a *PipelinesApiService) MoveConfig(ctx context.Context, org string, projec
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -881,7 +890,7 @@ func (a *PipelinesApiService) MoveConfig(ctx context.Context, org string, projec
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -902,32 +911,33 @@ func (a *PipelinesApiService) MoveConfig(ctx context.Context, org string, projec
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PipelineMoveConfigResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService Start a Pipeline Validation Event
 Starts a Pipeline Validation Event and returns the UUID of the Event created
@@ -946,20 +956,20 @@ Starts a Pipeline Validation Event and returns the UUID of the Event created
 */
 
 type PipelinesApiStartPipelineValidationEventOpts struct {
-    HarnessAccount optional.String
-    BranchName optional.String
-    ConnectorRef optional.String
-    RepoName optional.String
-    LoadFromCache optional.Bool
-    LoadFromFallbackBranch optional.Bool
+	HarnessAccount         optional.String
+	BranchName             optional.String
+	ConnectorRef           optional.String
+	RepoName               optional.String
+	LoadFromCache          optional.Bool
+	LoadFromFallbackBranch optional.Bool
 }
 
 func (a *PipelinesApiService) StartPipelineValidationEvent(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiStartPipelineValidationEventOpts) (PipelineValidationUuidResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue PipelineValidationUuidResponseBody
 	)
 
@@ -1018,7 +1028,7 @@ func (a *PipelinesApiService) StartPipelineValidationEvent(ctx context.Context, 
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -1039,32 +1049,33 @@ func (a *PipelinesApiService) StartPipelineValidationEvent(ctx context.Context, 
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PipelineValidationUuidResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService Update a Pipeline
 Updates a Pipeline.
@@ -1079,15 +1090,15 @@ Updates a Pipeline.
 */
 
 type PipelinesApiUpdatePipelineOpts struct {
-    HarnessAccount optional.String
+	HarnessAccount optional.String
 }
 
 func (a *PipelinesApiService) UpdatePipeline(ctx context.Context, body PipelineUpdateRequestBody, org string, project string, pipeline string, localVarOptionals *PipelinesApiUpdatePipelineOpts) (PipelineCreateResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Put")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Put")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue PipelineCreateResponseBody
 	)
 
@@ -1133,7 +1144,7 @@ func (a *PipelinesApiService) UpdatePipeline(ctx context.Context, body PipelineU
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -1154,32 +1165,33 @@ func (a *PipelinesApiService) UpdatePipeline(ctx context.Context, body PipelineU
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PipelineCreateResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 PipelinesApiService Update GitMetadata for Remote Pipelines
 Update git-metadata in remote pipeline
@@ -1188,22 +1200,22 @@ Update git-metadata in remote pipeline
  * @param project Project identifier
  * @param pipeline Pipeline identifier
  * @param optional nil or *PipelinesApiUpdatePipelineGitMetadataOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of GitMetadataUpdateRequestBody) - 
+     * @param "Body" (optional.Interface of GitMetadataUpdateRequestBody) -
      * @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 @return GitMetadataUpdateResponseBody
 */
 
 type PipelinesApiUpdatePipelineGitMetadataOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *PipelinesApiService) UpdatePipelineGitMetadata(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiUpdatePipelineGitMetadataOpts) (GitMetadataUpdateResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Put")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Put")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue GitMetadataUpdateResponseBody
 	)
 
@@ -1239,8 +1251,8 @@ func (a *PipelinesApiService) UpdatePipelineGitMetadata(ctx context.Context, org
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -1253,7 +1265,7 @@ func (a *PipelinesApiService) UpdatePipelineGitMetadata(ctx context.Context, org
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -1274,26 +1286,26 @@ func (a *PipelinesApiService) UpdatePipelineGitMetadata(ctx context.Context, org
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v GitMetadataUpdateResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
