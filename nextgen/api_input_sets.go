@@ -774,7 +774,7 @@ Creates a remote entity by fetching InputSet YAML from Harness.
   - @param project Project identifier
   - @param inputset InputSet identifier
   - @param optional nil or *InputSetsApiMoveConfigOpts - Optional Parameters:
-  - @param "Body" (optional.Interface of InputSetsMoveConfigRequestBody) -
+  - @param "Body" (optional.Interface of InputSetMoveConfigRequestBody) -
   - @param "HarnessAccount" (optional.String) -  Identifier field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
 
 @return InputSetsMoveConfigResponseBody
