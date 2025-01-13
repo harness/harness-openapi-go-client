@@ -23,6 +23,8 @@ type GitFindDetails struct {
 	ParentEntityOrgId string `json:"parent_entity_org_id,omitempty"`
 	// Project name of parent entity if its remote
 	ParentEntityProjectId string `json:"parent_entity_project_id,omitempty"`
-	// Specify comment with respect to changes  
+	// Specify comment with respect to changes
 	Comments string `json:"comments,omitempty"`
+	// Is harness code repo enabled
+	IsHarnessCodeRepo bool `json:"is_harness_code_repo,omitempty"`
 }

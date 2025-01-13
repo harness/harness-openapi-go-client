@@ -25,4 +25,6 @@ type InputSetGitUpdateDetails struct {
 	ParentEntityConnectorRef string `json:"parent_entity_connector_ref,omitempty"`
 	// Repository name for Parent Entity (Pipeline).
 	ParentEntityRepoName string `json:"parent_entity_repo_name,omitempty"`
+	// Is harness code repo enabled.
+	IsHarnessCodeRepo bool `json:"isHarnessCodeRepo,omitempty"`
 }
