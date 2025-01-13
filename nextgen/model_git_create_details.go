@@ -25,4 +25,6 @@ type GitCreateDetails struct {
 	StoreType string `json:"store_type,omitempty"`
 	// Name of the repository.
 	RepoName string `json:"repo_name,omitempty"`
+	// Is harness code repo enabled
+	IsHarnessCodeRepo bool `json:"is_harness_code_repo,omitempty"`
 }

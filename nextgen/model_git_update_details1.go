@@ -29,4 +29,6 @@ type GitUpdateDetails1 struct {
 	RepoName string `json:"repo_name,omitempty"`
 	// Specifies whether the Entity is to be stored in Git or not.
 	StoreType string `json:"store_type,omitempty"`
+	// Is harness code repo enabled
+	IsHarnessCodeRepo bool `json:"is_harness_code_repo,omitempty"`
 }
