@@ -1,4 +1,3 @@
-
 /*
  * Harness NextGen Software Delivery Platform API Reference
  *
@@ -12,11 +11,12 @@ package nextgen
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
+
 	"github.com/antihax/optional"
 )
 
@@ -26,6 +26,7 @@ var (
 )
 
 type OrgTemplateApiService service
+
 /*
 OrgTemplateApiService Create Template
 Creates a Template in the Organization scope.
@@ -38,16 +39,16 @@ Creates a Template in the Organization scope.
 */
 
 type OrgTemplateApiCreateTemplatesOrgOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *OrgTemplateApiService) CreateTemplatesOrg(ctx context.Context, org string, localVarOptionals *OrgTemplateApiCreateTemplatesOrgOpts) (TemplateResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue TemplateResponse
 	)
 
@@ -81,8 +82,8 @@ func (a *OrgTemplateApiService) CreateTemplatesOrg(ctx context.Context, org stri
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -95,7 +96,7 @@ func (a *OrgTemplateApiService) CreateTemplatesOrg(ctx context.Context, org stri
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -116,32 +117,33 @@ func (a *OrgTemplateApiService) CreateTemplatesOrg(ctx context.Context, org stri
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
 			var v TemplateResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 OrgTemplateApiService Delete Template
 Deletes particular version of Template at Organization scope.
@@ -151,14 +153,14 @@ Deletes particular version of Template at Organization scope.
  * @param version Version Label for Template
  * @param optional nil or *OrgTemplateApiDeleteTemplateOrgOpts - Optional Parameters:
      * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
-     * @param "Comments" (optional.String) -  Specify comment with respect to changes  
+     * @param "Comments" (optional.String) -  Specify comment with respect to changes
      * @param "ForceDelete" (optional.Bool) -  Enable this field to force delete a template
 */
 
 type OrgTemplateApiDeleteTemplateOrgOpts struct {
-    HarnessAccount optional.String
-    Comments optional.String
-    ForceDelete optional.Bool
+	HarnessAccount optional.String
+	Comments       optional.String
+	ForceDelete    optional.Bool
 }
 
 func (a *OrgTemplateApiService) DeleteTemplateOrg(ctx context.Context, template string, org string, version string, localVarOptionals *OrgTemplateApiDeleteTemplateOrgOpts) (*http.Response, error) {
@@ -167,7 +169,6 @@ func (a *OrgTemplateApiService) DeleteTemplateOrg(ctx context.Context, template 
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -185,8 +186,8 @@ func (a *OrgTemplateApiService) DeleteTemplateOrg(ctx context.Context, template 
 	}
 
 	if localVarOptionals != nil && localVarOptionals.ForceDelete.IsSet() {
-    	localVarQueryParams.Add("forceDelete", parameterToString(localVarOptionals.ForceDelete.Value(), ""))
-    }
+		localVarQueryParams.Add("forceDelete", parameterToString(localVarOptionals.ForceDelete.Value(), ""))
+	}
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -218,7 +219,7 @@ func (a *OrgTemplateApiService) DeleteTemplateOrg(ctx context.Context, template 
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -237,10 +238,9 @@ func (a *OrgTemplateApiService) DeleteTemplateOrg(ctx context.Context, template 
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -248,6 +248,7 @@ func (a *OrgTemplateApiService) DeleteTemplateOrg(ctx context.Context, template 
 
 	return localVarHttpResponse, nil
 }
+
 /*
 OrgTemplateApiService Retrieve a Template
 Retrieves particular version of Template at Organization scope.
@@ -268,22 +269,22 @@ Retrieves particular version of Template at Organization scope.
 */
 
 type OrgTemplateApiGetTemplateOrgOpts struct {
-    HarnessAccount optional.String
-    IncludeYaml optional.Bool
-    BranchName optional.String
-    ParentEntityConnectorRef optional.String
-    ParentEntityRepoName optional.String
-    ParentEntityAccountId optional.String
-    ParentEntityOrgId optional.String
-    ParentEntityProjectId optional.String
+	HarnessAccount           optional.String
+	IncludeYaml              optional.Bool
+	BranchName               optional.String
+	ParentEntityConnectorRef optional.String
+	ParentEntityRepoName     optional.String
+	ParentEntityAccountId    optional.String
+	ParentEntityOrgId        optional.String
+	ParentEntityProjectId    optional.String
 }
 
 func (a *OrgTemplateApiService) GetTemplateOrg(ctx context.Context, template string, org string, version string, localVarOptionals *OrgTemplateApiGetTemplateOrgOpts) (TemplateWithInputsResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue TemplateWithInputsResponse
 	)
 
@@ -348,7 +349,7 @@ func (a *OrgTemplateApiService) GetTemplateOrg(ctx context.Context, template str
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -369,32 +370,33 @@ func (a *OrgTemplateApiService) GetTemplateOrg(ctx context.Context, template str
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v TemplateWithInputsResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 OrgTemplateApiService Get Stable Template
 Retrieves stable version of Template at Organization scope.
@@ -414,22 +416,22 @@ Retrieves stable version of Template at Organization scope.
 */
 
 type OrgTemplateApiGetTemplateStableOrgOpts struct {
-    HarnessAccount optional.String
-    IncludeYaml optional.Bool
-    BranchName optional.String
-    ParentEntityConnectorRef optional.String
-    ParentEntityRepoName optional.String
-    ParentEntityAccountId optional.String
-    ParentEntityOrgId optional.String
-    ParentEntityProjectId optional.String
+	HarnessAccount           optional.String
+	IncludeYaml              optional.Bool
+	BranchName               optional.String
+	ParentEntityConnectorRef optional.String
+	ParentEntityRepoName     optional.String
+	ParentEntityAccountId    optional.String
+	ParentEntityOrgId        optional.String
+	ParentEntityProjectId    optional.String
 }
 
 func (a *OrgTemplateApiService) GetTemplateStableOrg(ctx context.Context, org string, template string, localVarOptionals *OrgTemplateApiGetTemplateStableOrgOpts) (TemplateWithInputsResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue TemplateWithInputsResponse
 	)
 
@@ -493,7 +495,7 @@ func (a *OrgTemplateApiService) GetTemplateStableOrg(ctx context.Context, org st
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -514,26 +516,26 @@ func (a *OrgTemplateApiService) GetTemplateStableOrg(ctx context.Context, org st
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v TemplateWithInputsResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
@@ -554,16 +556,16 @@ Fetches Org level Templates YAML from Git Repository and saves a record for it i
 */
 
 type TemplatesApiImportOrgTemplatesFromGitOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *OrgTemplateApiService) ImportOrgTemplatesFromGit(ctx context.Context, org string, template string, localVarOptionals *TemplatesApiImportOrgTemplatesFromGitOpts) (TemplatesSaveResponseBody, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue TemplatesSaveResponseBody
 	)
 
@@ -599,7 +601,7 @@ func (a *OrgTemplateApiService) ImportOrgTemplatesFromGit(ctx context.Context, o
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
 
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -633,26 +635,26 @@ func (a *OrgTemplateApiService) ImportOrgTemplatesFromGit(ctx context.Context, o
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v InputSetSaveResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
@@ -667,7 +669,7 @@ Retrieves list of Template with meta-data at Organization scope.
  * @param org Organization Identifier
  * @param optional nil or *OrgTemplateApiGetTemplatesListOrgOpts - Optional Parameters:
      * @param "HarnessAccount" (optional.String) -  Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped.
-     * @param "Page" (optional.Int32) -  Pagination page number strategy: Specify the page number within the paginated collection related to the number of items in each page 
+     * @param "Page" (optional.Int32) -  Pagination page number strategy: Specify the page number within the paginated collection related to the number of items in each page
      * @param "Limit" (optional.Int32) -  Pagination: Number of items to return
      * @param "Sort" (optional.String) -  Parameter on the basis of which sorting is done.
      * @param "Order" (optional.String) -  Order on the basis of which sorting is done.
@@ -683,27 +685,27 @@ Retrieves list of Template with meta-data at Organization scope.
 */
 
 type OrgTemplateApiGetTemplatesListOrgOpts struct {
-    HarnessAccount optional.String
-    Page optional.Int32
-    Limit optional.Int32
-    Sort optional.String
-    Order optional.String
-    SearchTerm optional.String
-    Type_ optional.String
-    Recursive optional.Bool
-    Names optional.Interface
-    Identifiers optional.Interface
-    Description optional.String
-    EntityTypes optional.Interface
-    ChildTypes optional.Interface
+	HarnessAccount optional.String
+	Page           optional.Int32
+	Limit          optional.Int32
+	Sort           optional.String
+	Order          optional.String
+	SearchTerm     optional.String
+	Type_          optional.String
+	Recursive      optional.Bool
+	Names          optional.Interface
+	Identifiers    optional.Interface
+	Description    optional.String
+	EntityTypes    optional.Interface
+	ChildTypes     optional.Interface
 }
 
 func (a *OrgTemplateApiService) GetTemplatesListOrg(ctx context.Context, org string, localVarOptionals *OrgTemplateApiGetTemplatesListOrgOpts) ([]TemplateMetadataSummaryResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue []TemplateMetadataSummaryResponse
 	)
 
@@ -740,7 +742,11 @@ func (a *OrgTemplateApiService) GetTemplatesListOrg(ctx context.Context, org str
 		localVarQueryParams.Add("names", parameterToString(localVarOptionals.Names.Value(), "multi"))
 	}
 	if localVarOptionals != nil && localVarOptionals.Identifiers.IsSet() {
-		localVarQueryParams.Add("identifiers", parameterToString(localVarOptionals.Identifiers.Value(), "multi"))
+		if identifiers, ok := localVarOptionals.Identifiers.Value().([]string); ok {
+			for _, id := range identifiers {
+				localVarQueryParams.Add("identifiers", id)
+			}
+		}
 	}
 	if localVarOptionals != nil && localVarOptionals.Description.IsSet() {
 		localVarQueryParams.Add("description", parameterToString(localVarOptionals.Description.Value(), ""))
@@ -781,7 +787,7 @@ func (a *OrgTemplateApiService) GetTemplatesListOrg(ctx context.Context, org str
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -802,32 +808,33 @@ func (a *OrgTemplateApiService) GetTemplatesListOrg(ctx context.Context, org str
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v []TemplateMetadataSummaryResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 OrgTemplateApiService Update Template
 Updates particular version of Template at Organization scope.
@@ -842,16 +849,16 @@ Updates particular version of Template at Organization scope.
 */
 
 type OrgTemplateApiUpdateTemplateOrgOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *OrgTemplateApiService) UpdateTemplateOrg(ctx context.Context, template string, org string, version string, localVarOptionals *OrgTemplateApiUpdateTemplateOrgOpts) (TemplateResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Put")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Put")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue TemplateResponse
 	)
 
@@ -887,8 +894,8 @@ func (a *OrgTemplateApiService) UpdateTemplateOrg(ctx context.Context, template 
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -901,7 +908,7 @@ func (a *OrgTemplateApiService) UpdateTemplateOrg(ctx context.Context, template 
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -922,32 +929,33 @@ func (a *OrgTemplateApiService) UpdateTemplateOrg(ctx context.Context, template 
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v TemplateResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 OrgTemplateApiService Update Stable Template
 Updates the stable version of Template at Organization scope.
@@ -962,16 +970,16 @@ Updates the stable version of Template at Organization scope.
 */
 
 type OrgTemplateApiUpdateTemplateStableOrgOpts struct {
-    Body optional.Interface
-    HarnessAccount optional.String
+	Body           optional.Interface
+	HarnessAccount optional.String
 }
 
 func (a *OrgTemplateApiService) UpdateTemplateStableOrg(ctx context.Context, org string, template string, version string, localVarOptionals *OrgTemplateApiUpdateTemplateStableOrgOpts) (TemplateUpdateStableResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Put")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Put")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue TemplateUpdateStableResponse
 	)
 
@@ -1007,8 +1015,8 @@ func (a *OrgTemplateApiService) UpdateTemplateStableOrg(ctx context.Context, org
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -1021,7 +1029,7 @@ func (a *OrgTemplateApiService) UpdateTemplateStableOrg(ctx context.Context, org
 				key = auth.Key
 			}
 			localVarHeaderParams["x-api-key"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -1042,26 +1050,26 @@ func (a *OrgTemplateApiService) UpdateTemplateStableOrg(ctx context.Context, org
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v TemplateUpdateStableResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
