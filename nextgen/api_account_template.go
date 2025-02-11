@@ -733,6 +733,7 @@ func (a *AccountTemplateApiService) GetTemplatesListAcc(ctx context.Context, loc
 		if identifiers, ok := localVarOptionals.Identifiers.Value().([]string); ok {
 			for _, id := range identifiers {
 				localVarQueryParams.Add("identifiers", id)
+
 			}
 		}
 	}
