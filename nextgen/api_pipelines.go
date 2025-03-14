@@ -376,8 +376,7 @@ func (a *PipelinesApiService) GetPipeline(ctx context.Context, org string, proje
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
 			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
+			return v, localVarHttpResponse, nil
 		}
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -390,16 +389,6 @@ func (a *PipelinesApiService) GetPipeline(ctx context.Context, org string, proje
 		newErr := GenericSwaggerError{
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v PipelineGetResponseBody
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
@@ -684,6 +673,7 @@ type PipelinesApiListPipelinesOpts struct {
 	EnvNames            optional.Interface
 	DeploymentType      optional.String
 	Repository          optional.String
+	IsHarnessCodeRepo   optional.Bool
 }
 
 func (a *PipelinesApiService) ListPipelines(ctx context.Context, org string, project string, localVarOptionals *PipelinesApiListPipelinesOpts) ([]PipelineListResponseBody, *http.Response, error) {
@@ -748,6 +738,9 @@ func (a *PipelinesApiService) ListPipelines(ctx context.Context, org string, pro
 	}
 	if localVarOptionals != nil && localVarOptionals.Repository.IsSet() {
 		localVarQueryParams.Add("repository", parameterToString(localVarOptionals.Repository.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.IsHarnessCodeRepo.IsSet() {
+		localVarQueryParams.Add("isHarnessCodeRepo", parameterToString(localVarOptionals.IsHarnessCodeRepo.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -962,6 +955,7 @@ Starts a Pipeline Validation Event and returns the UUID of the Event created
      * @param "RepoName" (optional.String) -  Name of the repository (for Git Experience).
      * @param "LoadFromCache" (optional.Bool) -  Flag to enable loading the remote pipeline from git or git cache
      * @param "LoadFromFallbackBranch" (optional.Bool) -  Flag to load the pipeline from the created non default branch
+     * @param "IsHarnessCodeRepo" (optional.Bool) -  Is Harness code repo enabled
 @return PipelineValidationUuidResponseBody
 */
 
@@ -972,6 +966,7 @@ type PipelinesApiStartPipelineValidationEventOpts struct {
 	RepoName               optional.String
 	LoadFromCache          optional.Bool
 	LoadFromFallbackBranch optional.Bool
+	IsHarnessCodeRepo      optional.Bool
 }
 
 func (a *PipelinesApiService) StartPipelineValidationEvent(ctx context.Context, org string, project string, pipeline string, localVarOptionals *PipelinesApiStartPipelineValidationEventOpts) (PipelineValidationUuidResponseBody, *http.Response, error) {
@@ -1004,6 +999,9 @@ func (a *PipelinesApiService) StartPipelineValidationEvent(ctx context.Context, 
 	}
 	if localVarOptionals != nil && localVarOptionals.LoadFromFallbackBranch.IsSet() {
 		localVarQueryParams.Add("load_from_fallback_branch", parameterToString(localVarOptionals.LoadFromFallbackBranch.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.IsHarnessCodeRepo.IsSet() {
+		localVarQueryParams.Add("isHarnessCodeRepo", parameterToString(localVarOptionals.IsHarnessCodeRepo.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
