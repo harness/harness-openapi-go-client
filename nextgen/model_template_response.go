@@ -47,4 +47,36 @@ type TemplateResponse struct {
 	ConnectorRef string `json:"connector_ref,omitempty"`
 	// True if this version is stable version of Template
 	StableTemplate bool `json:"stable_template,omitempty"`
+	// Governance metadata from OPA policy evaluation
+	GovernanceMetadata *TemplateGovernanceMetadata `json:"governance_metadata,omitempty"`
+}
+
+// TemplateGovernanceMetadata contains OPA policy evaluation results for template operations.
+type TemplateGovernanceMetadata struct {
+	Id      string                          `json:"id,omitempty"`
+	Deny    bool                            `json:"deny,omitempty"`
+	Details []TemplatePolicySetMetadata     `json:"details,omitempty"`
+	Message string                          `json:"message,omitempty"`
+	Status  string                          `json:"status,omitempty"`
+	Entity  string                          `json:"entity,omitempty"`
+	Type_   string                          `json:"type,omitempty"`
+	Action  string                          `json:"action,omitempty"`
+}
+
+// TemplatePolicySetMetadata contains evaluation results for a single policy set.
+type TemplatePolicySetMetadata struct {
+	Deny           bool                      `json:"deny,omitempty"`
+	PolicyMetadata []TemplatePolicyMetadata   `json:"policy_metadata,omitempty"`
+	PolicySetName  string                    `json:"policy_set_name,omitempty"`
+	Status         string                    `json:"status,omitempty"`
+	Identifier     string                    `json:"identifier,omitempty"`
+}
+
+// TemplatePolicyMetadata contains evaluation results for a single policy.
+type TemplatePolicyMetadata struct {
+	PolicyName   string   `json:"policy_name,omitempty"`
+	Severity     string   `json:"severity,omitempty"`
+	DenyMessages []string `json:"deny_messages,omitempty"`
+	Status       string   `json:"status,omitempty"`
+	Identifier   string   `json:"identifier,omitempty"`
 }
