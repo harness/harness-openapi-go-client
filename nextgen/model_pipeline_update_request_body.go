@@ -15,10 +15,14 @@ type PipelineUpdateRequestBody struct {
 	PipelineYaml string `json:"pipeline_yaml"`
 	// Pipeline identifier
 	Identifier string `json:"identifier"`
+	// Pipeline yaml version, should be one of '0' or '1'
+	Version string `json:"version,omitempty"`
 	// Pipeline name
 	Name string `json:"name"`
 	// Pipeline description
 	Description string `json:"description,omitempty"`
+	// Allow dynamic executions of Pipeline
+	AllowDynamicExecutions bool `json:"allowDynamicExecutions,omitempty"`
 	// Pipeline tags
 	Tags       map[string]string `json:"tags,omitempty"`
 	GitDetails *GitUpdateDetails `json:"git_details,omitempty"`

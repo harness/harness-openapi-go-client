@@ -15470,6 +15470,9 @@ components:
       - slug
       type: object
       properties:
+        version:
+          type: string
+          description: Pipeline yaml version, should be one of '0' or '1'
         pipeline_yaml:
           type: string
           description: Pipeline YAML (to be passed as a String).
@@ -15867,6 +15870,9 @@ components:
       - slug
       type: object
       properties:
+        version:
+          type: string
+          description: Pipeline yaml version, should be one of '0' or '1'
         pipeline_yaml:
           type: string
           description: Pipeline YAML (to be passed as a String).
