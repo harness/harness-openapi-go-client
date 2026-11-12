@@ -33,6 +33,8 @@ Commit messages:
 feat: [PIPE-12345]: Short description
 ```
 
+GitHub blocks new branches on `harness/harness-openapi-go-client`. Push the branch to your fork and open the pull request from there.
+
 `nextgen/git_push.sh` is leftover codegen. It force-pushes `master`. Do not run it.
 
 ## Layout
