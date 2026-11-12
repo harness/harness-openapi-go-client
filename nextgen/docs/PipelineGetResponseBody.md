@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Description** | **string** | Pipeline description | [optional] [default to null]
 **Tags** | **map[string]string** | Pipeline tags | [optional] [default to null]
 **Modules** | **[]string** | Modules utilised in the Pipeline. | [optional] [default to null]
+**StoreType** | **string** | Specifies whether the Entity is to be stored in Git or not. INLINE entities have no Git details. | [optional] [default to null]
 **GitDetails** | [***GitDetails**](GitDetails.md) |  | [optional] [default to null]
 **Valid** | **bool** | Specifies whether Pipeline is a valid or not. | [optional] [default to null]
 **YamlErrorWrapper** | [**[]YamlSchemaErrorWrapper**](YAMLSchemaErrorWrapper.md) | YAML schema errors. | [optional] [default to null]

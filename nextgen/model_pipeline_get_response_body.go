@@ -28,7 +28,9 @@ type PipelineGetResponseBody struct {
 	// Pipeline tags
 	Tags map[string]string `json:"tags,omitempty"`
 	// Modules utilised in the Pipeline.
-	Modules    []string    `json:"modules,omitempty"`
+	Modules []string `json:"modules,omitempty"`
+	// Specifies whether the Entity is to be stored in Git or not. INLINE entities have no Git details.
+	StoreType  string      `json:"store_type,omitempty"`
 	GitDetails *GitDetails `json:"git_details,omitempty"`
 	// Specifies whether Pipeline is a valid or not.
 	Valid bool `json:"valid,omitempty"`

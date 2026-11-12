@@ -15149,6 +15149,13 @@ components:
           description: Modules utilised in the Pipeline.
           items:
             type: string
+        store_type:
+          type: string
+          description: Specifies whether the Entity is to be stored in Git or not.
+            INLINE entities have no Git details.
+          enum:
+          - INLINE
+          - REMOTE
         git_details:
           $ref: '#/components/schemas/GitDetails'
         valid:
@@ -15203,6 +15210,7 @@ components:
           key: tags
         valid: true
         name: name
+        store_type: REMOTE
         git_details:
           file_path: file_path
           file_url: file_url
@@ -17599,6 +17607,7 @@ components:
                   example-tag-2: example-tag-2-value
                 modules:
                 - cd
+                store_type: REMOTE
                 git_details:
                   object_id: example_object
                   branch_name: branch
