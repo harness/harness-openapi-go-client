@@ -10,6 +10,10 @@ Name | Type | Description | Notes
 **CommitId** | **string** | Latest commit identifier. | [optional] [default to null]
 **FileUrl** | **string** | File URL of the Entity. | [optional] [default to null]
 **RepoUrl** | **string** | Repository URL of the Entity. | [optional] [default to null]
+**ConnectorRef** | **string** | Identifier of the Harness Connector used for CRUD operations on the Entity. | [optional] [default to null]
+**IsHarnessCodeRepo** | **bool** | Is Git Experience repo harness code. | [optional] [default to null]
+**BaseBranch** | **string** | Base branch name. | [optional] [default to null]
+**CommitMessage** | **string** | Commit message | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

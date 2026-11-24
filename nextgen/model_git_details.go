@@ -25,12 +25,12 @@ type GitDetails struct {
 	FileUrl string `json:"file_url,omitempty"`
 	// Repository URL of the Entity.
 	RepoUrl string `json:"repo_url,omitempty"`
+	// Identifier of the Harness Connector used for CRUD operations on the Entity.
+	ConnectorRef string `json:"connector_ref,omitempty"`
+	// Is Git Experience repo harness code.
+	IsHarnessCodeRepo bool `json:"is_harness_code_repo,omitempty"`
 	// Base branch name.
 	BaseBranch string `json:"base_branch,omitempty"`
-	// Connector reference.
-	ConnectorRef string `json:"connector_ref,omitempty"`
 	// Commit message
-	CommitMessage string `json:"commit_message"`
-	// Is harness code repo enabled
-	IsHarnessCodeRepo bool `json:"is_harness_code_repo,omitempty"`
+	CommitMessage string `json:"commit_message,omitempty"`
 }

@@ -9208,6 +9208,7 @@ paths:
                       example-tag-2: example-tag-2-value
                     modules:
                     - cd
+                    store_type: REMOTE
                     git_details:
                       object_id: example_object
                       branch_name: branch
@@ -9216,6 +9217,8 @@ paths:
                       commit_id: abcd123
                       file_url: www.repo/folder/file.com
                       repo_url: www.repo.com
+                      connector_ref: example_connector
+                      is_harness_code_repo: false
                     valid: true
                     yaml_error_wrapper:
                       message: something is incorrect
@@ -15079,6 +15082,18 @@ components:
         repo_url:
           type: string
           description: Repository URL of the Entity.
+        connector_ref:
+          type: string
+          description: Identifier of the Harness Connector used for CRUD operations on the Entity.
+        is_harness_code_repo:
+          type: boolean
+          description: Is Git Experience repo harness code.
+        base_branch:
+          type: string
+          description: Base branch name.
+        commit_message:
+          type: string
+          description: Commit message
       description: Git Experience related details of the Entity.
       example:
         file_path: file_path
@@ -15088,6 +15103,10 @@ components:
         repo_name: repo_name
         object_id: object_id
         commit_id: commit_id
+        connector_ref: connector_ref
+        is_harness_code_repo: false
+        base_branch: base_branch
+        commit_message: commit_message
       x-stoplight:
         id: qkq00fbqykhxw
       x-examples:
@@ -15099,6 +15118,8 @@ components:
           commit_id: abcd123
           file_url: www.repo/folder/file.com
           repo_url: www.repo.com
+          connector_ref: example_connector
+          is_harness_code_repo: false
     PipelineGetResponseBody:
       title: Pipeline Get Response Body
       type: object
@@ -15149,6 +15170,12 @@ components:
           description: Modules utilised in the Pipeline.
           items:
             type: string
+        store_type:
+          type: string
+          description: Specifies whether the Entity is to be stored in Git or not. INLINE entities have no Git details.
+          enum:
+          - INLINE
+          - REMOTE
         git_details:
           $ref: '#/components/schemas/GitDetails'
         valid:
@@ -15203,6 +15230,7 @@ components:
           key: tags
         valid: true
         name: name
+        store_type: REMOTE
         git_details:
           file_path: file_path
           file_url: file_url
@@ -15211,6 +15239,8 @@ components:
           repo_name: repo_name
           object_id: object_id
           commit_id: commit_id
+          connector_ref: connector_ref
+          is_harness_code_repo: false
         updated: 6
         slug: slug
       x-stoplight:
@@ -15229,6 +15259,7 @@ components:
             example-tag-2: example-tag-2-value
           modules:
           - cd
+          store_type: REMOTE
           git_details:
             object_id: example_object
             branch_name: branch
@@ -15237,6 +15268,8 @@ components:
             commit_id: abcd123
             file_url: www.repo/folder/file.com
             repo_url: www.repo.com
+            connector_ref: example_connector
+            is_harness_code_repo: false
           valid: true
           yaml_error_wrapper:
             message: something is incorrect
@@ -17599,6 +17632,7 @@ components:
                   example-tag-2: example-tag-2-value
                 modules:
                 - cd
+                store_type: REMOTE
                 git_details:
                   object_id: example_object
                   branch_name: branch
@@ -17607,6 +17641,8 @@ components:
                   commit_id: abcd123
                   file_url: www.repo/folder/file.com
                   repo_url: www.repo.com
+                  connector_ref: example_connector
+                  is_harness_code_repo: false
                 valid: true
                 yaml_error_wrapper:
                   message: something is incorrect
