@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PipelineYaml** | **string** | Pipeline YAML (returned as a String). | [optional] [default to null]
 **TemplateAppliedPipelineYaml** | **string** | Pipeline YAML after resolving Templates (returned as a String). | [optional] [default to null]
-**Identifier** | **string** | Pipeline identifier | [optional] [default to null]
+**Slug** | **string** | Pipeline identifier | [optional] [default to null]
 **Name** | **string** | Pipeline name | [optional] [default to null]
 **Org** | **string** | Organization identifier | [optional] [default to null]
 **Project** | **string** | Project identifier | [optional] [default to null]

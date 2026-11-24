@@ -9198,7 +9198,7 @@ paths:
                   value:
                     pipeline_yaml: example_yaml_text
                     template_applied_pipeline_yaml: example_yaml_text_with_template
-                    identifier: example_pipeline
+                    slug: example_pipeline
                     name: ExamplePipeline
                     org: example_org
                     project: example_project
@@ -15130,7 +15130,7 @@ components:
         template_applied_pipeline_yaml:
           type: string
           description: Pipeline YAML after resolving Templates (returned as a String).
-        identifier:
+        slug:
           maxLength: 64
           minLength: 1
           pattern: "^[a-zA-Z_][0-9a-zA-Z_$]{0,63}$"
@@ -15242,14 +15242,14 @@ components:
           connector_ref: connector_ref
           is_harness_code_repo: false
         updated: 6
-        identifier: slug
+        slug: slug
       x-stoplight:
         id: twnioaqmn69uy
       x-examples:
         example-get:
           pipeline_yaml: example_yaml_text
           template_applied_pipeline_yaml: example_yaml_text_with_template
-          identifier: example_pipeline
+          slug: example_pipeline
           name: ExamplePipeline
           org: example_org
           project: example_project
