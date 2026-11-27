@@ -9677,6 +9677,23 @@ paths:
                     \ abcd123\n  file_url: www.repo/folder/file.com\n  repo_url: www.repo.com\n\
                     updated: 1234567890\nstore_type: INLINE\nconnector_ref: example_connector_ref\n\
                     stable_template: true\n"
+  /v1/templates/git-metadata/{template}:
+    put:
+      tags:
+      - Account Template
+      summary: Update Git details
+      description: Update Git details for multiple version.
+      operationId: update-git-metadata-details
+      parameters:
+      - $ref: '#/components/parameters/Template'
+      - $ref: '#/components/parameters/AccountHeaderParam'
+      requestBody:
+        $ref: '#/components/requestBodies/TemplateUpdateGitMetadataRequestBody'
+      responses:
+        "200":
+          $ref: '#/components/responses/TemplateUpdateGitMetadataResponse'
+      x-stoplight:
+        id: aq4yncugtvz9i
   /v1/templates/{template}:
     get:
       tags:
@@ -10207,6 +10224,24 @@ paths:
               examples:
                 example-1:
                   value: "stable_version: example_version\n"
+  /v1/orgs/{org}/templates/git-metadata/{template}:
+    put:
+      tags:
+      - Org Template
+      summary: Update Git details
+      description: Update Git details for multiple version.
+      operationId: update-git-metadata-details-org
+      parameters:
+      - $ref: '#/components/parameters/Template'
+      - $ref: '#/components/parameters/Org'
+      - $ref: '#/components/parameters/AccountHeaderParam'
+      requestBody:
+        $ref: '#/components/requestBodies/TemplateUpdateGitMetadataRequestBody'
+      responses:
+        "200":
+          $ref: '#/components/responses/TemplateUpdateGitMetadataResponse'
+      x-stoplight:
+        id: 1h3jzdzd6sk7r
   /v1/orgs/{org}/templates:
     get:
       tags:
@@ -11085,6 +11120,25 @@ paths:
               examples:
                 example-1:
                   value: "stable_version: example_version\n"
+  /v1/orgs/{org}/projects/{project}/templates/git-metadata/{template}:
+    put:
+      tags:
+      - Project Template
+      summary: Update Git details
+      description: Update Git details for multiple version.
+      operationId: update-git-metadata-details-project
+      parameters:
+      - $ref: '#/components/parameters/Template'
+      - $ref: '#/components/parameters/Org'
+      - $ref: '#/components/parameters/Project'
+      - $ref: '#/components/parameters/AccountHeaderParam'
+      requestBody:
+        $ref: '#/components/requestBodies/TemplateUpdateGitMetadataRequestBody'
+      responses:
+        "200":
+          $ref: '#/components/responses/TemplateUpdateGitMetadataResponse'
+      x-stoplight:
+        id: 59vfuu9mx2jc5
   /v1/orgs/{org}/projects/{project}/templates:
     get:
       tags:
@@ -16598,6 +16652,47 @@ components:
           file_path: /folder/file.json
           repo_name: example_repository
           store_type: INLINE
+    TemplateUpdateGitMetadataRequest:
+      title: TemplateUpdateGitMetadataRequest
+      x-stoplight:
+        id: oncztjr3yt1v9
+      type: object
+      description: Lists down request params for template update git details request
+      properties:
+        version:
+          type: string
+          x-stoplight:
+            id: dwsta3ltxn5d6
+        git_details:
+          $ref: '#/components/schemas/GitDetailsMetadata'
+    GitDetailsMetadata:
+      title: GitDetailsMetadata
+      x-stoplight:
+        id: 6kuoihhpbg79y
+      type: object
+      properties:
+        file_path:
+          type: string
+          x-stoplight:
+            id: zbb0endkjn6qt
+        repo_name:
+          type: string
+          x-stoplight:
+            id: z0rf0plpb19zg
+        connector_ref:
+          type: string
+          x-stoplight:
+            id: zla5pumxfv3hw
+      description: Git Details
+    TemplateUpdateGitMetadataResponse:
+      title: TemplateUpdateGitMetadataResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          x-stoplight:
+            id: 8ltkjqppobw04
+      description: Template GitMetadata response
     TemplateUpdateRequestBody:
       title: TemplateUpdateRequestBody
       type: object
@@ -17992,6 +18087,12 @@ components:
           examples:
             example-1:
               value: "stable_version: example_version\n"
+    TemplateUpdateGitMetadataResponse:
+      description: Template GitMetadata response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TemplateUpdateGitMetadataResponse'
   parameters:
     Limit:
       name: limit
@@ -19645,6 +19746,13 @@ components:
                 \  last_commit_id: example_commit_id\n  file_path: /folder/file.json\n\
                 \  repo_name: example_repository\n  store_type: INLINE\ncomments:\
                 \ sample_comments\n"
+    TemplateUpdateGitMetadataRequestBody:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TemplateUpdateGitMetadataRequest'
     TemplateFetchBody:
       description: Templates Fetch Request Body
       content:

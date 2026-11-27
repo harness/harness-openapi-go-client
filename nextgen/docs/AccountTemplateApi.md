@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**GetTemplateAcc**](AccountTemplateApi.md#GetTemplateAcc) | **Get** /v1/templates/{template}/versions/{version} | Retrieve a Template
 [**GetTemplateStableAcc**](AccountTemplateApi.md#GetTemplateStableAcc) | **Get** /v1/templates/{template} | Get Stable Template
 [**GetTemplatesListAcc**](AccountTemplateApi.md#GetTemplatesListAcc) | **Get** /v1/templates | Get Templates List
+[**UpdateGitMetadataDetails**](AccountTemplateApi.md#UpdateGitMetadataDetails) | **Put** /v1/templates/git-metadata/{template} | Update Git details
 [**UpdateTemplateAcc**](AccountTemplateApi.md#UpdateTemplateAcc) | **Put** /v1/templates/{template}/versions/{version} | Update Template
 [**UpdateTemplateStableAcc**](AccountTemplateApi.md#UpdateTemplateStableAcc) | **Put** /v1/templates/{template}/versions/{version}/stable | Update Stable Template
 
@@ -217,6 +218,43 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, application/yaml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UpdateGitMetadataDetails**
+> TemplateUpdateGitMetadataResponse UpdateGitMetadataDetails(ctx, template, optional)
+Update Git details
+
+Update Git details for multiple version.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **template** | **string**| Template Identifier |
+ **optional** | ***AccountTemplateApiUpdateGitMetadataDetailsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a AccountTemplateApiUpdateGitMetadataDetailsOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **body** | [**optional.Interface of []TemplateUpdateGitMetadataRequest**](TemplateUpdateGitMetadataRequest.md)|  |
+ **harnessAccount** | **optional.**| Slug field of the account the resource is scoped to. This is required for Authorization methods other than the x-api-key header. If you are using the x-api-key header, this can be skipped. |
+
+### Return type
+
+[**TemplateUpdateGitMetadataResponse**](TemplateUpdateGitMetadataResponse.md)
+
+### Authorization
+
+[x-api-key](../README.md#x-api-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

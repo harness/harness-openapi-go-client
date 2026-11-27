@@ -51,6 +51,7 @@ Class | Method | HTTP request | Description
 *AccountTemplateApi* | [**GetTemplateAcc**](docs/AccountTemplateApi.md#gettemplateacc) | **Get** /v1/templates/{template}/versions/{version} | Retrieve a Template
 *AccountTemplateApi* | [**GetTemplateStableAcc**](docs/AccountTemplateApi.md#gettemplatestableacc) | **Get** /v1/templates/{template} | Get Stable Template
 *AccountTemplateApi* | [**GetTemplatesListAcc**](docs/AccountTemplateApi.md#gettemplateslistacc) | **Get** /v1/templates | Get Templates List
+*AccountTemplateApi* | [**UpdateGitMetadataDetails**](docs/AccountTemplateApi.md#updategitmetadatadetails) | **Put** /v1/templates/git-metadata/{template} | Update Git details
 *AccountTemplateApi* | [**UpdateTemplateAcc**](docs/AccountTemplateApi.md#updatetemplateacc) | **Put** /v1/templates/{template}/versions/{version} | Update Template
 *AccountTemplateApi* | [**UpdateTemplateStableAcc**](docs/AccountTemplateApi.md#updatetemplatestableacc) | **Put** /v1/templates/{template}/versions/{version}/stable | Update Stable Template
 *FilterResourceGroupsApi* | [**FilterResourceGroups**](docs/FilterResourceGroupsApi.md#filterresourcegroups) | **Post** /v1/resource-groups/filter | Filter Resource Groups
@@ -79,6 +80,7 @@ Class | Method | HTTP request | Description
 *OrgTemplateApi* | [**GetTemplateOrg**](docs/OrgTemplateApi.md#gettemplateorg) | **Get** /v1/orgs/{org}/templates/{template}/versions/{version} | Retrieve a Template
 *OrgTemplateApi* | [**GetTemplateStableOrg**](docs/OrgTemplateApi.md#gettemplatestableorg) | **Get** /v1/orgs/{org}/templates/{template} | Get Stable Template
 *OrgTemplateApi* | [**GetTemplatesListOrg**](docs/OrgTemplateApi.md#gettemplateslistorg) | **Get** /v1/orgs/{org}/templates | Get Templates List
+*OrgTemplateApi* | [**UpdateGitMetadataDetailsOrg**](docs/OrgTemplateApi.md#updategitmetadatadetailsorg) | **Put** /v1/orgs/{org}/templates/git-metadata/{template} | Update Git details
 *OrgTemplateApi* | [**UpdateTemplateOrg**](docs/OrgTemplateApi.md#updatetemplateorg) | **Put** /v1/orgs/{org}/templates/{template}/versions/{version} | Update Template
 *OrgTemplateApi* | [**UpdateTemplateStableOrg**](docs/OrgTemplateApi.md#updatetemplatestableorg) | **Put** /v1/orgs/{org}/templates/{template}/versions/{version}/stable | Update Stable Template
 *OrganizationApi* | [**CreateOrganization**](docs/OrganizationApi.md#createorganization) | **Post** /v1/orgs | Create an organization
@@ -146,6 +148,7 @@ Class | Method | HTTP request | Description
 *ProjectTemplateApi* | [**GetTemplateProject**](docs/ProjectTemplateApi.md#gettemplateproject) | **Get** /v1/orgs/{org}/projects/{project}/templates/{template}/versions/{version} | Retrieve a Template
 *ProjectTemplateApi* | [**GetTemplateStableProject**](docs/ProjectTemplateApi.md#gettemplatestableproject) | **Get** /v1/orgs/{org}/projects/{project}/templates/{template} | Get Stable Template
 *ProjectTemplateApi* | [**GetTemplatesListProject**](docs/ProjectTemplateApi.md#gettemplateslistproject) | **Get** /v1/orgs/{org}/projects/{project}/templates | Get Templates List
+*ProjectTemplateApi* | [**UpdateGitMetadataDetailsProject**](docs/ProjectTemplateApi.md#updategitmetadatadetailsproject) | **Put** /v1/orgs/{org}/projects/{project}/templates/git-metadata/{template} | Update Git details
 *ProjectTemplateApi* | [**UpdateTemplateProject**](docs/ProjectTemplateApi.md#updatetemplateproject) | **Put** /v1/orgs/{org}/projects/{project}/templates/{template}/versions/{version} | Update Template
 *ProjectTemplateApi* | [**UpdateTemplateStableProject**](docs/ProjectTemplateApi.md#updatetemplatestableproject) | **Put** /v1/orgs/{org}/projects/{project}/templates/{template}/versions/{version}/stable | Update Stable Template
 
@@ -191,6 +194,7 @@ Class | Method | HTTP request | Description
  - [GitCreateDetails](docs/GitCreateDetails.md)
  - [GitCreateDetails1](docs/GitCreateDetails1.md)
  - [GitDetails](docs/GitDetails.md)
+ - [GitDetailsMetadata](docs/GitDetailsMetadata.md)
  - [GitFindDetails](docs/GitFindDetails.md)
  - [GitHttpConnectorSpec](docs/GitHttpConnectorSpec.md)
  - [GitHttpEncryptedConnectorSpec](docs/GitHttpEncryptedConnectorSpec.md)
@@ -238,6 +242,8 @@ Class | Method | HTTP request | Description
  - [TemplateCreateRequestBody](docs/TemplateCreateRequestBody.md)
  - [TemplateMetadataSummaryResponse](docs/TemplateMetadataSummaryResponse.md)
  - [TemplateResponse](docs/TemplateResponse.md)
+ - [TemplateUpdateGitMetadataRequest](docs/TemplateUpdateGitMetadataRequest.md)
+ - [TemplateUpdateGitMetadataResponse](docs/TemplateUpdateGitMetadataResponse.md)
  - [TemplateUpdateRequestBody](docs/TemplateUpdateRequestBody.md)
  - [TemplateUpdateStableResponse](docs/TemplateUpdateStableResponse.md)
  - [TemplateWithInputsResponse](docs/TemplateWithInputsResponse.md)
